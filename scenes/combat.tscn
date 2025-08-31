@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ba64c74pgq0ai"]
+
+[ext_resource type="Script" uid="uid://dgvhlseqwstse" path="res://scripts/Combat.gd" id="1_764e3"]
+
+[node name="Combat" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_764e3")

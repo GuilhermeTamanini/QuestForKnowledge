@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://di81p1iblb4ds"]
+
+[ext_resource type="Script" uid="uid://cs8aqax2fxejh" path="res://scripts/Player.gd" id="1"]
+
+[sub_resource type="GDScript" id="GDScript_w1g0n"]
+script/source = "extends Area2D
+
+@export var destino: String = \"\"
+
+func _ready():
+    body_entered.connect(_on_body_entered)
+
+func _on_body_entered(body):
+    if body.is_in_group(\"player\") and destino != \"\":
+        get_tree().change_scene_to_file(destino)
+"
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(32, 32)
+
+[node name="MapForest" type="Node2D"]
+
+[node name="Ground" type="ColorRect" parent="."]
+offset_right = 640.0
+offset_bottom = 480.0
+color = Color(0.3, 0.8, 0.3, 1)
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(100, 100)
+script = ExtResource("1")
+
+[node name="Sprite" type="ColorRect" parent="Player"]
+offset_right = 16.0
+offset_bottom = 16.0
+color = Color(0.2, 0.6, 1, 1)
+
+[node name="Door" type="Area2D" parent="."]
+position = Vector2(300, 200)
+script = SubResource("GDScript_w1g0n")
+destino = "res://scenes/map_village.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
+shape = SubResource("1")

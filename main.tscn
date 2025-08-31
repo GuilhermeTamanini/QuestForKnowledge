@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvnuyso61mbu4"]
+
+[sub_resource type="GDScript" id="GDScript_7dm0k"]
+script/source = "extends Control
+
+var perguntas = []
+var pergunta_atual = {}
+var vida_jogador = 3
+var vida_inimigo = 3
+
+func _ready():
+	carregar_perguntas()
+	nova_pergunta()
+
+func carregar_perguntas():
+	var file = FileAccess.open(\"res://data/perguntas.json\", FileAccess.READ)
+	if file:
+		perguntas = JSON.parse_string(file.get_as_text())
+		file.close()
+
+func nova_pergunta():
+	if perguntas.size() == 0:
+		$PerguntaLabel.text = \"Sem perguntas carregadas.\"
+		return
+	pergunta_atual = perguntas[randi() % perguntas.size()]
+	$PerguntaLabel.text = pergunta_atual[\"pergunta\"]
+	for i in range(4):
+		var botao = $\"Opcoes/Opção{i+1}\"
+		botao.text = pergunta_atual[\"opcoes\"][i]
+		botao.pressed.disconnect_all()
+		botao.pressed.connect(func(): verificar_resposta(i))
+
+func verificar_resposta(indice):
+	if indice == pergunta_atual[\"correta\"]:
+		vida_inimigo -= 1
+		$Feedback.text = \"Correto!\"
+	else:
+		vida_jogador -= 1
+		$Feedback.text = \"Errado!\"
+
+	atualizar_hud()
+
+	if vida_inimigo <= 0:
+		$Feedback.text = \"Você venceu!\"
+	elif vida_jogador <= 0:
+		$Feedback.text = \"Game Over!\"
+	else:
+		nova_pergunta()
+
+func atualizar_hud():
+	$VidaJogador.text = \"Vida Jogador: %s\" % vida_jogador
+	$VidaInimigo.text = \"Vida Inimigo: %s\" % vida_inimigo
+"
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = SubResource("GDScript_7dm0k")

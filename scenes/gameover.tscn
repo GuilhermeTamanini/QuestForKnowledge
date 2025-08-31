@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://cljdotcm36hnw"]
+
+[ext_resource type="Script" uid="uid://64rkiygalrql" path="res://scripts/GameOver.gd" id="1_ncp31"]
+
+[node name="Gameover" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ncp31")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GameOverContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="GameOverLabel" type="Label" parent="VBoxContainer/GameOverContainer"]
+layout_mode = 2
+text = "Game Over!"
+
+[node name="OptionsContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/OptionsContainer"]
+layout_mode = 2
+
+[node name="TryAgainButton" type="Button" parent="VBoxContainer/OptionsContainer/HBoxContainer"]
+layout_mode = 2
+text = "Try again?"
+
+[node name="MenuButton" type="Button" parent="VBoxContainer/OptionsContainer/HBoxContainer"]
+layout_mode = 2
+text = "Go back to menu"

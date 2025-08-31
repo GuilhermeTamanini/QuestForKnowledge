@@ -1,0 +1,26 @@
+[
+  {
+	"question": "Qual é a capital da França?",
+	"difficultyLevel": 1,
+	"option": ["Paris", "Londres", "Roma", "Berlim"],
+	"correct": 0
+  },
+  {
+	"question": "Quanto é 5 x 6?",
+	"difficultyLevel": 1,
+	"option": ["11", "20", "30", "25"],
+	"correct": 2
+  },
+  {
+	"question": "Quem escreveu 'Dom Quixote'?",
+	"difficultyLevel": 1,
+	"option": ["Machado de Assis", "Cervantes", "Camões", "Shakespeare"],
+	"correct": 1
+  },
+  {
+	"question": "Qual planeta é conhecido como planeta vermelho?",
+	"difficultyLevel": 1,
+	"option": ["Terra", "Marte", "Júpiter", "Saturno"],
+	"correct": 1
+  }
+]
