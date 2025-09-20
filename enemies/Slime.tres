@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EnemyConfig" load_steps=3 format=3 uid="uid://ckqipbflu3x5r"]
 
-[ext_resource type="Script" uid="uid://btky2via55uh2" path="res://scripts/EnemyConfig.gd" id="1_1eo7g"]
+[ext_resource type="Script" uid="uid://btky2via55uh2" path="res://scripts/configs/EnemyConfig.gd" id="1_1eo7g"]
 [ext_resource type="Texture2D" uid="uid://ccn872ab1rpgy" path="res://assets/sprites/slime.png" id="2_qke5t"]
 
 [resource]

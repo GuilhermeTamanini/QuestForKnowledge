@@ -9,18 +9,17 @@ var enemy: IEnemy
 @onready var sprite_node: Sprite2D = $Sprite2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
-func setup_from_config(config: EnemyConfig):
+func setupFromConfig(config: EnemyConfig):
 	enemyName = config.name
 	dangerLevel = config.dangerLevel
 	inventory = []
-
-	enemy.attackPower = config.attackPower
+	enemy = IEnemy.new()
+	enemy.attackPower = 44
 	enemy.health = config.health
 
 	if sprite_node and config.sprite:
 		sprite_node.texture = config.sprite
 
-	# ajusta o CollisionShape2D de acordo com o sprite
 	if collision and sprite_node.texture:
 		var objShape = RectangleShape2D.new()
 		objShape.extents = sprite_node.texture.get_size() * sprite_node.scale / 2

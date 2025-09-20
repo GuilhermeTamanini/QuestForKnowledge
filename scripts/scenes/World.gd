@@ -5,11 +5,13 @@ extends Node2D
 
 func _ready():
 	var player_scene = load("res://scenes/entities/player.tscn")
-	var player = player_scene.instantiate()
-	add_child(player)
+	var player: IPlayer = player_scene.instantiate()
+	var cfg: CharacterConfig = load("res://characters/Test.tres")
+	player.setupFromConfig(cfg)
+	add_child(player) 
 	player.global_position = Vector2(400, 400)
 
-	PlayerManager.currentPlayer = player
+	PlayerManager.currentPlayer = player 
 
 	camera.position = player.position
 	camera.set_as_top_level(true)
@@ -20,4 +22,4 @@ func _ready():
 	camera.get_parent().remove_child(camera)
 	player.add_child(camera)
 
-	spawner.spawn_enemies_around(player.global_position)
+	spawner.SpawnEnemiesAround(player.global_position)

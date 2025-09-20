@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dmuyyipfrjh5v"]
 
-[ext_resource type="Script" uid="uid://cs8aqax2fxejh" path="res://scripts/Player.gd" id="1_ucweq"]
+[ext_resource type="Script" uid="uid://cs8aqax2fxejh" path="res://scripts/scenes/Player.gd" id="1_ucweq"]
 [ext_resource type="Texture2D" uid="uid://bdwjpsioehq1w" path="res://assets/sprites/skull.png" id="2_08t41"]
-[ext_resource type="Script" uid="uid://bn0bdmahf1ixl" path="res://scripts/EntityShape.gd" id="3_1ie0h"]
+[ext_resource type="Script" uid="uid://bn0bdmahf1ixl" path="res://scripts/scenes/EntityShape.gd" id="3_1ie0h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_42nxq"]
 

@@ -1,15 +1,21 @@
 extends Control
 
-var player: IPlayer
-var enemy: IEnemy
+var player: Player
+var enemy: Enemy
 
+@onready var playerSprite: Sprite2D = $PlayerSprite
+@onready var enemySprite: Sprite2D = $EnemySprite
 var questions = []
 var current_question = {}
 var buttons = []
 
-func _ready():
+func _ready() -> void:
 	player = PlayerManager.currentPlayer
 	enemy = PlayerManager.currentEnemy
+
+	playerSprite.texture = player.sprite
+	playerSprite.position = Vector2(200, 200)
+	enemySprite.position = Vector2(600, 200)
 
 	loadQuestions()
 
@@ -23,21 +29,22 @@ func _ready():
 	newQuestion()
 	updateHud()
 
-func loadQuestions():
+func loadQuestions() -> void:
 	var file: FileAccess = FileAccess.open("res://data/questions.json", FileAccess.READ)
 	
 	if not file:
 		return
 
-	var allQuestions: Dictionary = JSON.parse_string(file.get_as_text())
+	var allQuestions: Array = JSON.parse_string(file.get_as_text())
 	
 	file.close()
 
+	# TODO Enemy has a config called dangerLevel, this will help when we need to change the level of the questions. 
 	for question in allQuestions:
 		if question.get("difficultyLevel", 1) == 1:
 			questions.append(question)
 
-func newQuestion():
+func newQuestion() -> void:
 	if questions.is_empty():
 		$QuestionLabel.text = "Sem questões carregadas."
 		return
@@ -48,7 +55,7 @@ func newQuestion():
 	for i in range(4):
 		buttons[i].text = current_question["options"][i]
 
-func checkAnswer(index: int):
+func checkAnswer(index: int) -> void:
 	if index == current_question["correct"]:
 		enemy.takeDamage(player.character.attackPower)
 		$Feedback.text = "Resposta correta!"
@@ -70,6 +77,6 @@ func checkAnswer(index: int):
 	else:
 		newQuestion()
 
-func updateHud():
+func updateHud() -> void:
 	$PlayerLife.text = "Vida Jogador: %d" % player.character.health
 	$EnemyLife.text = "Vida Inimigo: %d" % enemy.health

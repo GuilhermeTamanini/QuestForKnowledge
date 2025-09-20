@@ -1,8 +1,22 @@
-extends CharacterBody2D
+extends IPlayer
 class_name Player
 
 @export var speed: float = 200
+@onready var spriteNode: Sprite2D = $Sprite2D
+@onready var collision: CollisionShape2D = $CollisionShape2D
 var vel: Vector2 = Vector2.ZERO
+var characterName: String
+var sprite: Texture2D
+
+func setupFromConfig(config: CharacterConfig):
+	characterName = config.name
+	character = ICharacter.new()
+	character.health = config.health
+	character.attackPower = config.attackPower
+	
+	if spriteNode and config.sprite:
+		sprite = config.sprite
+		spriteNode.texture = config.sprite
 
 func _physics_process(delta):
 	handle_input()
@@ -11,6 +25,7 @@ func _physics_process(delta):
 
 	for i in range(get_slide_collision_count()):
 		var col = get_slide_collision(i).get_collider()
+
 		if col is CharacterBody2D:
 			col.interact()
 
