@@ -2,5 +2,5 @@
 ### Manager to handle current player data
 extends Node
 
-var currentPlayer: IPlayer
-var currentEnemy: IEnemy
+var currentPlayer: Player
+var currentEnemy: Enemy

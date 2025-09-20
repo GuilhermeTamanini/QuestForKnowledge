@@ -83,7 +83,7 @@ func startNewGame():
 	showCharacterSelection(name)
 
 func continuePressed():
-	get_tree().change_scene_to_file("res://scenes/LoadMenu.tscn")
+	GlobalHelper.changeSceneTo(GameEnums.SceneEnum.WORLD)
 
 func loadPlayer(name: String):
 	playerId = name
@@ -101,8 +101,6 @@ func loadPlayer(name: String):
 			player.inventory = data.get("inventory", [])
 
 		file.close()
-
-	PlayerManager.currentPlayer = player
 
 	get_tree().change_scene_to_file("res://scenes/combat.tscn")
 
@@ -134,7 +132,6 @@ func selectCharacter(idx: int, name: String):
 		file.store_string(JSON.stringify(data))
 		file.close()
 
-	PlayerManager.currentPlayer = player
 	get_tree().change_scene_to_file("res://scenes/combat.tscn")
 
 func quitGame():

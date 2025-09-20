@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkdaf477k1fpm"]
+
+[ext_resource type="Script" uid="uid://cvyy3sfqy37yp" path="res://scripts/MainMenu.gd" id="1"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1")
+
+[node name="CenterContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TitleLabel" type="Label" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="NameContainer" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="CenterContainer/NameContainer"]
+layout_mode = 2
+
+[node name="NameInput" type="LineEdit" parent="CenterContainer/NameContainer"]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="ContinueButton" type="Button" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="SavedPlayerList" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="CharacterContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="ErrorLabel" type="Label" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="CenterContainer"]
+layout_mode = 2

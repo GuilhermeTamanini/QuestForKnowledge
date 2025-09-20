@@ -1,25 +1,20 @@
-extends IPlayer
-
+extends CharacterBody2D
 class_name Player
 
 @export var speed: float = 200
 var vel: Vector2 = Vector2.ZERO
 
-func _init() -> void:
-	character = TestCharacter.new()
-
 func _physics_process(delta):
-	handleInput()
+	handle_input()
 	velocity = vel
 	move_and_slide()
 
 	for i in range(get_slide_collision_count()):
-		var col = get_slide_collision(i)
+		var col = get_slide_collision(i).get_collider()
+		if col is CharacterBody2D:
+			col.interact()
 
-		if col.get_collider() is IInteractable:
-			col.get_collider().interact()
-
-func handleInput():
+func handle_input():
 	vel = Vector2.ZERO
 	if Input.is_action_pressed("ui_right"): vel.x += 1
 	if Input.is_action_pressed("ui_left"): vel.x -= 1

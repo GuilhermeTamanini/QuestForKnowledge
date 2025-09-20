@@ -4,4 +4,4 @@ class_name TestCharacter
 
 func _init() -> void:
 	health = 50
-	atackPower = 20
+	attackPower = 20

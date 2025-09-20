@@ -1,8 +1,9 @@
 extends CollisionShape2D
 
-@onready var collision = $CollisionShape2D
+@onready var sprite_node: Sprite2D = get_parent().get_node("Sprite2D")
 
 func _ready():
-	var shape = RectangleShape2D.new()
-	shape.extents = Vector2(32, 16)
-	collision.shape = shape
+	if sprite_node and sprite_node.texture:
+		var objShape = RectangleShape2D.new()
+		objShape.extents = sprite_node.texture.get_size() * sprite_node.scale / 2
+		shape = objShape
