@@ -13,15 +13,8 @@ var savedPlayers: Array = []
 func _ready():
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	
-	startButton.text = "Novo jogo"
-	continueButton.text = "Continuar"
-	quitButton.text = "Sair do jogo"
-	
 	if SaveManager.getSaves().is_empty():
 		continueButton.disabled = true
-	
-	$CenterContainer/TitleLabel.text = "Quest for Knowledge: the battle of wits!"
-	$CenterContainer/NameContainer/NameLabel.text = "Qual seu nome?"
 	
 	characterManager = CharacterManager.new()
 	characterManager.loadPlayerClasses()
@@ -65,22 +58,23 @@ func startNewGame():
 	var name = $CenterContainer/NameContainer/NameInput.text.strip_edges()
 
 	if name == "":
-		name = "Player"
+		name = "Jogador"
 
 	playerId = name.to_lower().replace(" ", "_")
-	var filePath = "user://%s_inventory.json" % playerId
+	#var filePath = "user://%s_inventory.json" % playerId
 
-	if FileAccess.file_exists(filePath):
-		$CenterContainer/ErrorLabel.text = "Name already exists. Choose another."
-		return
+	#if FileAccess.file_exists(filePath):
+		#$CenterContainer/ErrorLabel.text = "Name already exists. Choose another."
+		#return
+#
+	#var file = FileAccess.open(filePath, FileAccess.WRITE)
+#
+	#if file:
+		#file.store_string("{}")
+		#file.close()
 
-	var file = FileAccess.open(filePath, FileAccess.WRITE)
-
-	if file:
-		file.store_string("{}")
-		file.close()
-
-	showCharacterSelection(name)
+	#showCharacterSelection(name)
+	GlobalHelper.changeSceneTo(GameEnums.SceneEnum.WORLD)
 
 func continuePressed():
 	GlobalHelper.changeSceneTo(GameEnums.SceneEnum.WORLD)

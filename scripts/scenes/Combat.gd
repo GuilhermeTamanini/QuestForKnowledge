@@ -1,3 +1,4 @@
+# Deprecated
 extends Control
 
 var player: Player
@@ -10,8 +11,8 @@ var current_question = {}
 var buttons = []
 
 func _ready() -> void:
-	player = PlayerManager.currentPlayer
-	enemy = PlayerManager.currentEnemy
+	player = GlobalManager.currentPlayer
+	enemy = GlobalManager.currentEnemy
 
 	playerSprite.texture = player.sprite
 	playerSprite.position = Vector2(200, 200)
@@ -31,15 +32,15 @@ func _ready() -> void:
 
 func loadQuestions() -> void:
 	var file: FileAccess = FileAccess.open("res://data/questions.json", FileAccess.READ)
-	
+
 	if not file:
 		return
 
 	var allQuestions: Array = JSON.parse_string(file.get_as_text())
-	
+
 	file.close()
 
-	# TODO Enemy has a config called dangerLevel, this will help when we need to change the level of the questions. 
+	# TODO Enemy has a config called dangerLevel, this will help when we need to change the level of the questions.
 	for question in allQuestions:
 		if question.get("difficultyLevel", 1) == 1:
 			questions.append(question)
@@ -48,7 +49,7 @@ func newQuestion() -> void:
 	if questions.is_empty():
 		$QuestionLabel.text = "Sem questões carregadas."
 		return
-	
+
 	current_question = questions[randi() % questions.size()]
 	$QuestionLabel.text = current_question["question"]
 

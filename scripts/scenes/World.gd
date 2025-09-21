@@ -1,25 +1,46 @@
 extends Node2D
 
-@onready var spawner: Node2D = $EnemySpawner
-@onready var camera: Camera2D = $Camera2D
+var battle_started := false
+@export var enemyScene: PackedScene = load("res://scenes/entities/enemy.tscn")
+@export var configs: Array[EnemyConfig] = []
+@export var spawnRadius: float = 200
+@export var count: int = 3
 
-func _ready():
+func _ready() -> void:
 	var player_scene = load("res://scenes/entities/player.tscn")
 	var player: IPlayer = player_scene.instantiate()
-	var cfg: CharacterConfig = load("res://characters/Test.tres")
-	player.setupFromConfig(cfg)
-	add_child(player) 
-	player.global_position = Vector2(400, 400)
+	var characterCfg: CharacterConfig = load("res://characters/Test.tres")
+	player.setupFromConfig(characterCfg)
+	add_child(player)
+	player.global_position = Vector2(300, 300)
 
-	PlayerManager.currentPlayer = player 
+	GlobalManager.currentPlayer = player
 
-	camera.position = player.position
-	camera.set_as_top_level(true)
+	var camera = Camera2D.new()
+	player.add_child(camera)
+	camera.position = Vector2.ZERO
 	camera.make_current()
 	camera.position_smoothing_enabled = true
 	camera.position_smoothing_speed = 5.0
-	camera.global_position = player.global_position
-	camera.get_parent().remove_child(camera)
-	player.add_child(camera)
+	camera.zoom = Vector2(0.5, 0.5)
 
-	spawner.SpawnEnemiesAround(player.global_position)
+	if !GlobalHelper.worldInitialized:
+		return
+		
+	spawnEnemies(player)
+	GlobalHelper.worldInitialized = true
+
+func spawnEnemies(player: IPlayer) -> void:
+	if configs.is_empty(): 
+		return
+
+	for i in range(count):
+		var enemy = enemyScene.instantiate() as Enemy
+		var cfg: EnemyConfig = configs[randi() % configs.size()]
+		enemy.setupFromConfig(cfg)
+
+		var angle = randf() * TAU
+		var offset = Vector2(cos(angle), sin(angle)) * spawnRadius
+		enemy.global_position = player.global_position + offset
+
+		add_child(enemy)

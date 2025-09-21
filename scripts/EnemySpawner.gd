@@ -5,7 +5,7 @@ extends Node2D
 @export var spawnRadius: float = 200
 @export var count: int = 3
 
-func SpawnEnemiesAround(center: Vector2):
+func spawnEnemies(center: Vector2):
 	for i in range(count):
 		if configs.is_empty(): return
 

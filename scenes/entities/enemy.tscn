@@ -8,8 +8,8 @@
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_d7j71")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_67neu")
 script = ExtResource("2_67neu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

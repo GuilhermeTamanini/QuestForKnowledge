@@ -18,14 +18,14 @@ func populateSaves():
 	savesList.clear()
 	var saves = SaveManager.getSaves()
 	for save in saves:
-		var displayName = save.replace("_inventory.json","")
+		var displayName = save.replace("_inventory.json", "")
 		savesList.add_item(displayName)
 
 func onBackPressed():
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")
 
 func loadSave(file_name: String):
-	var data = SaveManager.loadSave(file_name.replace(".json",""))
+	var data = SaveManager.loadSave(file_name.replace(".json", ""))
 	get_tree().change_scene_to_file("res://scenes/CharacterSelect.tscn")
 
 func getSaves() -> Array:

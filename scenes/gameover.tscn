@@ -29,6 +29,6 @@ layout_mode = 2
 layout_mode = 2
 text = "Try again?"
 
-[node name="MenuButton" type="Button" parent="VBoxContainer/OptionsContainer/HBoxContainer"]
+[node name="GoToMenuButton" type="Button" parent="VBoxContainer/OptionsContainer/HBoxContainer"]
 layout_mode = 2
 text = "Go back to menu"

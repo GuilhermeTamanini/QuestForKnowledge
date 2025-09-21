@@ -1,9 +1,11 @@
 extends Node
 
+var worldInitialized: bool = false
+
 const SCENE_PATHS: Dictionary = {
 	GameEnums.SceneEnum.MENU: "res://scenes/menu.tscn",
 	GameEnums.SceneEnum.LOADMENU: "res://scenes/loadmenu.tscn",
-	GameEnums.SceneEnum.COMBAT: "res://scenes/combat.tscn",
+	GameEnums.SceneEnum.COMBAT: "res://scenes/battle.tscn",
 	GameEnums.SceneEnum.GAMEOVER: "res://scenes/gameover.tscn",
 	GameEnums.SceneEnum.WORLD: "res://scenes/world.tscn"
 }
@@ -16,3 +18,6 @@ func gameOver() -> void:
 
 func startCombat() -> void:
 	changeSceneTo(GameEnums.SceneEnum.COMBAT)
+	
+func goToWorld() -> void:
+	changeSceneTo(GameEnums.SceneEnum.WORLD)

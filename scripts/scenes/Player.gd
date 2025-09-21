@@ -1,9 +1,9 @@
 extends IPlayer
 class_name Player
 
-@export var speed: float = 200
-@onready var spriteNode: Sprite2D = $Sprite2D
+@export var speed: float = 400
 @onready var collision: CollisionShape2D = $CollisionShape2D
+var spriteNode: Sprite2D
 var vel: Vector2 = Vector2.ZERO
 var characterName: String
 var sprite: Texture2D
@@ -14,9 +14,14 @@ func setupFromConfig(config: CharacterConfig):
 	character.health = config.health
 	character.attackPower = config.attackPower
 	
+	spriteNode = Sprite2D.new()
+	
 	if spriteNode and config.sprite:
 		sprite = config.sprite
 		spriteNode.texture = config.sprite
+		spriteNode.scale = Vector2(0.3, 0.3)
+
+	add_child(spriteNode)
 
 func _physics_process(delta):
 	handle_input()
@@ -26,7 +31,7 @@ func _physics_process(delta):
 	for i in range(get_slide_collision_count()):
 		var col = get_slide_collision(i).get_collider()
 
-		if col is CharacterBody2D:
+		if col is IEnemyCollidable:
 			col.interact()
 
 func handle_input():

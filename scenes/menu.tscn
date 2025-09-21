@@ -14,21 +14,25 @@ offset_bottom = 40.0
 
 [node name="TitleLabel" type="Label" parent="CenterContainer"]
 layout_mode = 2
+text = "Quest for Knowledge: the battle of wits!"
 
 [node name="NameContainer" type="HBoxContainer" parent="CenterContainer"]
 layout_mode = 2
 
 [node name="NameLabel" type="Label" parent="CenterContainer/NameContainer"]
 layout_mode = 2
+text = "Qual seu nome?"
 
 [node name="NameInput" type="LineEdit" parent="CenterContainer/NameContainer"]
 layout_mode = 2
 
 [node name="StartButton" type="Button" parent="CenterContainer"]
 layout_mode = 2
+text = "Novo jogo"
 
 [node name="ContinueButton" type="Button" parent="CenterContainer"]
 layout_mode = 2
+text = "Continuar"
 
 [node name="SavedPlayerList" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
@@ -41,3 +45,4 @@ layout_mode = 2
 
 [node name="QuitButton" type="Button" parent="CenterContainer"]
 layout_mode = 2
+text = "Sair do jogo"
