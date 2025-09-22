@@ -1,6 +1,6 @@
 extends Control
 
-var enemy: IEnemy = GlobalManager.currentEnemy
+var enemy: Enemy = GlobalManager.currentEnemy
 var player: IPlayer = GlobalManager.currentPlayer
 var current_answer := -1
 
@@ -66,7 +66,10 @@ func _on_option_pressed(selected_index):
 	_updateStatus()
 
 func _updateStatus():
-	$MarginContainer/VBoxContainer/StatusLabel.text += "\nPlayer HP: %d | Inimigo HP: %d" % [player.health, enemy.health]
+	$MarginContainer/VBoxContainer/StatusLabel.text += "\nPlayer HP: %d | Inimigo HP: %d" % [
+		player.health, 
+		enemy.health
+	]
 
 #func _checkEnd() -> bool:
 	#if enemy_hp <= 0:

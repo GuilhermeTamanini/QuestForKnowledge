@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dmuyyipfrjh5v"]
 
-[ext_resource type="Script" uid="uid://cs8aqax2fxejh" path="res://scripts/scenes/Player.gd" id="1_ucweq"]
-[ext_resource type="Script" uid="uid://bn0bdmahf1ixl" path="res://scripts/scenes/EntityShape.gd" id="3_1ie0h"]
+[ext_resource type="Script" uid="uid://cs8aqax2fxejh" path="res://scripts/scenes/entities/Player.gd" id="1_ucweq"]
+[ext_resource type="Script" uid="uid://bn0bdmahf1ixl" path="res://scripts/scenes/entities/EntityShape.gd" id="3_1ie0h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_42nxq"]
 

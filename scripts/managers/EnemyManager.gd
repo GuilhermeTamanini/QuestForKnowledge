@@ -1,3 +1,4 @@
+### Manager to handle enemySpawning
 extends Node
 
 var enemiesData: Array[Dictionary] = []
@@ -13,6 +14,11 @@ func _ready() -> void:
 func instantiateEnemies(parent: Node2D):
 	if !alreadyInstantiated:
 		_spawnEnemy(parent, Vector2(1, 1))
+		alreadyInstantiated = true
+		return
+
+	push_warning("AAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
+	push_warning(enemiesData)
 
 	for data in enemiesData:
 		if data.has("node") and is_instance_valid(data.node):
@@ -25,7 +31,6 @@ func instantiateEnemies(parent: Node2D):
 
 		data["node"] = enemy_node
 
-	alreadyInstantiated = true
 
 func _spawnEnemy(parentNode: Node2D, position: Vector2) -> void:
 	if configs.is_empty():
@@ -38,8 +43,15 @@ func _spawnEnemy(parentNode: Node2D, position: Vector2) -> void:
 
 		parentNode.add_child(enemy)
 
+		enemiesData.append({ 
+			"node": enemy,
+			"config": cfg,
+			"position": position
+		})
+
 		enemy.global_position = position
 
+### Load the enemies configs from res://enemies/
 func _loadEnemiesConfigs() -> void:
 	var dir := DirAccess.open(ENEMIES_CONFIG_PATH)
 

@@ -1,4 +1,6 @@
+### Class that contains the player logic
 extends IPlayer
+
 class_name Player
 
 @export var speed: float = 600
@@ -19,6 +21,12 @@ func setupFromConfig(config: CharacterConfig):
 		spriteNode.texture = config.sprite
 		spriteNode.scale = Vector2(0.3, 0.3)
 		push_warning("Montou o sprite")
+
+func takeDamage() -> void:
+	health -= GlobalManager.DAMAGE
+
+	if health <= 0:
+		GlobalHelper.gameOver()
 
 func _physics_process(delta):
 	handle_input()

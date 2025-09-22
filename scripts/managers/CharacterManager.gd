@@ -1,3 +1,4 @@
+### Just a idea
 extends Resource
 
 class_name CharacterManager

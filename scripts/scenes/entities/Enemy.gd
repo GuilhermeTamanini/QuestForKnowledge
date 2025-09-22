@@ -1,3 +1,4 @@
+### Class that contains the Enemy logic
 extends IEnemy
 
 class_name Enemy
@@ -20,6 +21,31 @@ func setupFromConfig(config: EnemyConfig):
 	sprite_node.texture = config.sprite
 	sprite_node.scale = Vector2(0.3, 0.3)
 	add_child(sprite_node)
+
+func interact() -> void:
+	GlobalManager.currentEnemy = self
+	GlobalHelper.startCombat()
+
+func takeDamage() -> void:
+	health -= GlobalManager.DAMAGE
+	if health <= 0:
+		push_warning("Health %d" % health)
+		die()
+
+func die() -> void:
+	if is_instance_valid(self):
+		queue_free()
+
+		push_warning(EnemyManager.enemiesData)
+
+		for data in EnemyManager.enemiesData:
+			if data.get("node") == self:
+				data.erase("node")
+				EnemyManager.enemiesData.erase(data)
+				break
+
+	GlobalManager.currentEnemy = null
+	GlobalHelper.goToWorld()
 
 func _physics_process(delta):
 	timer += delta
