@@ -1,108 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://cj567q57n58r2"]
 
-[sub_resource type="GDScript" id="GDScript_mgoel"]
-script/source = "extends Control
-
-var enemy: Enemy = GlobalManager.currentEnemy
-var player_hp := GlobalManager.currentPlayer.character.health
-var enemy_hp := enemy.enemy.health
-const DAMAGE := 5
-
-var current_answer := -1
-
-func _ready():
-	randomize()
-	_show_question()
-	_update_status()
-
-func _generate_question() -> Dictionary:
-	var a = randi() % 12 + 1
-	var b = randi() % 12 + 1
-	var op = randi() % 3
-	var ans := 0
-	var qtext := \"\"
-	match op:
-		0:
-			ans = a + b
-			qtext = \"%d + %d = ?\" % [a, b]
-		1:
-			ans = a - b
-			qtext = \"%d - %d = ?\" % [a, b]
-		2:
-			ans = a * b
-			qtext = \"%d × %d = ?\" % [a, b]
-
-	var options: Array = [str(ans)]
-	while options.size() < 4:
-		var alt = ans + int(randf() * 11) - 5
-		if alt < 0:
-			alt = abs(alt) + 1
-		if str(alt) not in options:
-			options.append(str(alt))
-
-	options.shuffle()
-	var answer_index = options.find(str(ans))
-	return {\"q\": qtext, \"options\": options, \"answer\": answer_index}
-
-func _show_question():
-	var qdata = _generate_question()
-	$MarginContainer/VBoxContainer/QuestionLabel.text = qdata.q
-	current_answer = qdata.answer
-
-	var options_box = $MarginContainer/VBoxContainer/Options
-
-	for child in options_box.get_children():
-		child.queue_free()
-
-	for i in range(qdata.options.size()):
-		var btn = Button.new()
-		btn.text = qdata.options[i]
-		btn.pressed.connect(Callable(self, \"_on_option_pressed\").bind(i))
-		options_box.add_child(btn)
-
-func _on_option_pressed(selected_index):
-	if selected_index == current_answer:
-		enemy_hp -= DAMAGE
-		$MarginContainer/VBoxContainer/StatusLabel.text = \"Acertou! Causou %d de dano.\" % DAMAGE
-	else:
-		player_hp -= DAMAGE
-		$MarginContainer/VBoxContainer/StatusLabel.text = \"Errou! Você recebeu %d de dano.\" % DAMAGE
-
-	_update_status()
-
-	if _check_end():
-		_disable_buttons()
-	else:
-		_show_question()
-
-func _update_status():
-	$MarginContainer/VBoxContainer/StatusLabel.text += \"\\nPlayer HP: %d | Inimigo HP: %d\" % [player_hp, enemy_hp]
-
-func _check_end() -> bool:
-	if enemy_hp <= 0:
-		$MarginContainer/VBoxContainer/QuestionLabel.text = \"Você venceu!\"
-		if is_instance_valid(enemy):
-			enemy.queue_free()
-
-		GlobalManager.currentEnemy = null
-		GlobalHelper.goToWorld()
-		return true
-	elif player_hp <= 0:
-		$MarginContainer/VBoxContainer/QuestionLabel.text = \"Você perdeu!\"
-		GlobalHelper.gameOver()
-		return true
-	return false
-
-func _disable_buttons():
-	var options_box = $MarginContainer/VBoxContainer/Options
-	for child in options_box.get_children():
-		child.disabled = true
-"
+[ext_resource type="Script" uid="uid://dcxfjpf2ibinv" path="res://scripts/scenes/Battle.gd" id="1_dn72j"]
 
 [node name="Battle" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-script = SubResource("GDScript_mgoel")
+script = ExtResource("1_dn72j")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0

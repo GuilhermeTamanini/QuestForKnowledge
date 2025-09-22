@@ -3,4 +3,6 @@
 extends Node
 
 var currentPlayer: Player
-var currentEnemy: Enemy
+var playerPosisionBeforeLastBattle: Vector2 = Vector2(400, 400)
+var currentEnemy: IEnemy
+const DAMAGE: int = 5

@@ -18,9 +18,9 @@ config/icon="res://icon.svg"
 [autoload]
 
 GlobalManager="*res://scripts/managers/GlobalManager.gd"
-SaveManager="*res://scripts/managers/SaveManager.gd"
 GlobalHelper="*res://scripts/globals/GlobalHelper.gd"
 GameEnums="*res://scripts/globals/GameEnums.gd"
+EnemyManager="*res://scripts/managers/EnemyManager.gd"
 
 [dotnet]
 

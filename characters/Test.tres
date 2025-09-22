@@ -6,7 +6,6 @@
 [resource]
 script = ExtResource("1_xarfo")
 name = "Esqueleto"
-attackPower = 5
 health = 20
 sprite = ExtResource("2_dnf6m")
 metadata/_custom_type_script = "uid://bm5ll41h2ivjn"

@@ -1,35 +1,25 @@
-extends IEnemyCollidable
+extends IEnemy
+
 class_name Enemy
 
 @onready var collision: CollisionShape2D = $CollisionShape2D
-const SPEED := 150.0
-const RADIUS := 20.0
-const COLOR := Color(1.0, 0.2, 0.2)
+const SPEED := 150
 
 var directions = [Vector2.UP, Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT]
 var current_dir_index = 0
 var move_time = 1.5
-var timer = 0.0
+var timer = 0
 
 func setupFromConfig(config: EnemyConfig):
 	enemyName = config.name
 	dangerLevel = config.dangerLevel
 
-	var stats = IEnemy.new()
-	stats.attackPower = config.attackPower
-	stats.health = config.health
-	enemy = stats
+	health = config.health
+
 	var sprite_node = Sprite2D.new()
-
-	if sprite_node and config.sprite:
-		sprite_node.texture = config.sprite
-
+	sprite_node.texture = config.sprite
+	sprite_node.scale = Vector2(0.3, 0.3)
 	add_child(sprite_node)
-
-func interact() -> void:
-	print("Player encontrou %s (nível %d)" % [enemyName, dangerLevel])
-	GlobalManager.currentEnemy = self
-	GlobalHelper.startCombat()
 
 func _physics_process(delta):
 	timer += delta

@@ -7,7 +7,8 @@ const SCENE_PATHS: Dictionary = {
 	GameEnums.SceneEnum.LOADMENU: "res://scenes/loadmenu.tscn",
 	GameEnums.SceneEnum.COMBAT: "res://scenes/battle.tscn",
 	GameEnums.SceneEnum.GAMEOVER: "res://scenes/gameover.tscn",
-	GameEnums.SceneEnum.WORLD: "res://scenes/world.tscn"
+	GameEnums.SceneEnum.WORLD: "res://scenes/world.tscn",
+	GameEnums.SceneEnum.ENEMY: "res://scenes/entities/enemy.tscn"
 }
 
 func changeSceneTo(scene: GameEnums.SceneEnum) -> void:
