@@ -8,3 +8,4 @@ class_name EnemyConfig
 @export var dangerLevel: GameEnums.DangerLevel
 @export var health: int
 @export var sprite: Texture2D
+@export var map: GameEnums.MapEnum

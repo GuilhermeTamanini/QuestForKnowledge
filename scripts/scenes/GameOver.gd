@@ -9,6 +9,6 @@ func _ready() -> void:
 
 func tryAgain() -> void:
 	GlobalHelper.changeSceneTo(GameEnums.SceneEnum.WORLD)
-	
+
 func goToMenu() -> void:
 	GlobalHelper.changeSceneTo(GameEnums.SceneEnum.MENU)

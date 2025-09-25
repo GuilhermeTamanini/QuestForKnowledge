@@ -1,10 +1,16 @@
+### Battle.gd
 extends Control
 
-var enemy: Enemy = GlobalManager.currentEnemy
-var player: IPlayer = GlobalManager.currentPlayer
+var enemyHealth: int
+var playerHealth: int
+var isBoss: bool
+var enemy: Dictionary = EnemyManager.getEnemyById(GlobalManager.currentEnemyId)
 var current_answer := -1
 
 func _ready():
+	enemyHealth = enemy["health"]
+	isBoss = enemy["isBoss"]
+	playerHealth = 20
 	randomize()
 	_showQuestion()
 	_updateStatus()
@@ -51,37 +57,40 @@ func _showQuestion():
 	for i in range(qdata.options.size()):
 		var btn = Button.new()
 		btn.text = qdata.options[i]
-		btn.pressed.connect(Callable(self, "_on_option_pressed").bind(i))
+		btn.pressed.connect(Callable(self, "_onOptionPressed").bind(i))
 		options_box.add_child(btn)
 
-func _on_option_pressed(selected_index):
+func _onOptionPressed(selected_index):
 	if selected_index == current_answer:
-		enemy.takeDamage()
+		enemyHealth -= GlobalManager.DAMAGE
 		$MarginContainer/VBoxContainer/StatusLabel.text = "Acertou! Causou %d de dano." % GlobalManager.DAMAGE
+		if enemyHealth <= 0:
+			if isBoss: 
+				GlobalHelper.clearManagers()
+				GlobalHelper.endGame()
+				return
+			EnemyManager.removeEnemy(enemy["id"])
 	else:
-		enemy.takeDamage()
-		#player.takeDamage()
+		#playerHealth -= GlobalManager.DAMAGE
+		enemyHealth -= GlobalManager.DAMAGE
+		#if playerHealth <= 0:
+			#GlobalHelper.gameOver()
+		if enemyHealth <= 0:
+			if isBoss:
+				GlobalHelper.clearManagers()
+				GlobalHelper.endGame()
+				return
+			EnemyManager.removeEnemy(enemy["id"])
 		$MarginContainer/VBoxContainer/StatusLabel.text = "Errou! Você recebeu %d de dano." % GlobalManager.DAMAGE
 
 	_updateStatus()
+	_showQuestion()
 
 func _updateStatus():
 	$MarginContainer/VBoxContainer/StatusLabel.text += "\nPlayer HP: %d | Inimigo HP: %d" % [
-		player.health, 
-		enemy.health
+		playerHealth,
+		enemyHealth
 	]
-
-#func _checkEnd() -> bool:
-	#if enemy_hp <= 0:
-		#$MarginContainer/VBoxContainer/QuestionLabel.text = "Você venceu!"
-#
-		#GlobalHelper.goToWorld()
-		#return true
-	#elif player_hp <= 0:
-		#$MarginContainer/VBoxContainer/QuestionLabel.text = "Você perdeu!"
-		#GlobalHelper.gameOver()
-		#return true
-	#return false
 
 func _disable_buttons():
 	var options_box = $MarginContainer/VBoxContainer/Options

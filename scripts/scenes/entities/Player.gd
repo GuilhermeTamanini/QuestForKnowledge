@@ -1,32 +1,39 @@
-### Class that contains the player logic
+### Player.gd. Class that contains the player logic
 extends IPlayer
 
 class_name Player
 
 @export var speed: float = 600
-@onready var collision: CollisionShape2D = $CollisionShape2D
 var spriteNode: Sprite2D
 var vel: Vector2 = Vector2.ZERO
 var characterName: String
 var sprite: Texture2D
+const PLAYER_SIZE: Vector2 = Vector2(64, 64)
 
 func setupFromConfig(config: CharacterConfig):
 	characterName = config.name
 	health = config.health
-	
+
 	spriteNode = $Sprite2D
-	
+
 	if spriteNode and config.sprite:
-		sprite = config.sprite
 		spriteNode.texture = config.sprite
-		spriteNode.scale = Vector2(0.3, 0.3)
-		push_warning("Montou o sprite")
+		_normalizeSprite(spriteNode)
 
-func takeDamage() -> void:
-	health -= GlobalManager.DAMAGE
+func _normalizeSprite(spriteNode: Sprite2D) -> void:
+	var textureSize = spriteNode.texture.get_size()
+	if textureSize == Vector2.ZERO:
+		return
 
-	if health <= 0:
-		GlobalHelper.gameOver()
+	spriteNode.scale = PLAYER_SIZE / textureSize
+
+	var rectShape = RectangleShape2D.new()
+	rectShape.extents = PLAYER_SIZE / 2
+
+	var collision = CollisionShape2D.new()
+	collision.shape = rectShape
+
+	add_child(collision)
 
 func _physics_process(delta):
 	handle_input()
