@@ -9,4 +9,5 @@ name = "Slime"
 dangerLevel = 0
 health = 20
 sprite = ExtResource("2_qke5t")
+map = 0
 metadata/_custom_type_script = "uid://btky2via55uh2"

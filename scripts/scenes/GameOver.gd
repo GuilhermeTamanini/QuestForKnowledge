@@ -4,11 +4,11 @@ extends Control
 @onready var goToMenuButton: Button = $"VBoxContainer/OptionsContainer/HBoxContainer/GoToMenuButton"
 
 func _ready() -> void:
-	tryAgainButton.pressed.connect(tryAgain)
-	goToMenuButton.pressed.connect(goToMenu)
+	tryAgainButton.pressed.connect(_tryAgain)
+	goToMenuButton.pressed.connect(_goToMenu)
 
-func tryAgain() -> void:
+func _tryAgain() -> void:
 	GlobalHelper.changeSceneTo(GameEnums.SceneEnum.WORLD)
 
-func goToMenu() -> void:
+func _goToMenu() -> void:
 	GlobalHelper.changeSceneTo(GameEnums.SceneEnum.MENU)

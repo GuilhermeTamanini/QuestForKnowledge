@@ -71,16 +71,10 @@ func _onOptionPressed(selected_index):
 				return
 			EnemyManager.removeEnemy(enemy["id"])
 	else:
-		#playerHealth -= GlobalManager.DAMAGE
-		enemyHealth -= GlobalManager.DAMAGE
-		#if playerHealth <= 0:
-			#GlobalHelper.gameOver()
-		if enemyHealth <= 0:
-			if isBoss:
-				GlobalHelper.clearManagers()
-				GlobalHelper.endGame()
-				return
-			EnemyManager.removeEnemy(enemy["id"])
+		playerHealth -= GlobalManager.DAMAGE
+		if playerHealth <= 0:
+			GlobalHelper.clearManagers()
+			GlobalHelper.gameOver()
 		$MarginContainer/VBoxContainer/StatusLabel.text = "Errou! Você recebeu %d de dano." % GlobalManager.DAMAGE
 
 	_updateStatus()

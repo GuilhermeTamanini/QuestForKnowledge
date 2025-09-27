@@ -10,8 +10,8 @@ var directions = [Vector2.UP, Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT]
 var current_dir_index = 0
 var move_time = 1.5
 var timer = 0
-const MOB_SIZE = Vector2(64, 64)
-const BOSS_SIZE = Vector2(84, 84)
+const MOB_SIZE = Vector2(100, 100)
+const BOSS_SIZE = Vector2(256, 256)
 var isBoss := false
 
 func setupFromConfig(config: EnemyConfig):
@@ -30,7 +30,7 @@ func _normalizeSprite(sprite: Sprite2D) -> void:
 	var textureSize = sprite.texture.get_size()
 	if textureSize == Vector2.ZERO:
 		return
-	
+
 	var targetSize = BOSS_SIZE if isBoss else MOB_SIZE
 	sprite.scale = targetSize / textureSize
 
@@ -50,6 +50,7 @@ func pushPlayerAway():
 
 func showBossWarning():
 	var lbl := Label.new()
+	lbl.position = GlobalManager.currentPlayer.global_position + Vector2(0, -50)
 	lbl.text = "Mate todos os mobs primeiro!"
 	lbl.add_theme_color_override("font_color", Color(1, 0, 0))
 	lbl.add_theme_font_size_override("font_size", 32)
@@ -76,7 +77,7 @@ func interact() -> void:
 		pushPlayerAway()
 		await pauseGameForWarning()
 		return
-	
+
 	GlobalManager.currentEnemyId = id
 	GlobalHelper.startCombat()
 

@@ -10,5 +10,4 @@ var playerPosisionBeforeLastBattle: Vector2 = Vector2(400, 400)
 const DAMAGE: int = 5
 
 func _ready() -> void:
-	currentEnemyId = ""
-	currentPlayer = null
+	currentMap = GameEnums.MapEnum.MAP1

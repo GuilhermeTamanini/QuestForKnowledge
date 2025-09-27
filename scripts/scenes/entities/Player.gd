@@ -3,12 +3,12 @@ extends IPlayer
 
 class_name Player
 
-@export var speed: float = 600
+@export var speed: float = 2000
 var spriteNode: Sprite2D
 var vel: Vector2 = Vector2.ZERO
 var characterName: String
 var sprite: Texture2D
-const PLAYER_SIZE: Vector2 = Vector2(64, 64)
+const PLAYER_SIZE: Vector2 = Vector2(100, 100)
 
 func setupFromConfig(config: CharacterConfig):
 	characterName = config.name

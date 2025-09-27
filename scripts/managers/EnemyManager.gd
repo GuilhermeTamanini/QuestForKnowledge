@@ -3,15 +3,19 @@ extends Node
 
 var enemies: Array[Dictionary] = []
 var alreadyInstantiated: bool = false
-var configs: Array[EnemyConfig]
+var configs: Array[EnemyConfig] = [
+	preload("res://enemies/Slime.tres"),
+	preload("res://enemies/SlimeBoss.tres")
+]
 const ENEMIES_CONFIG_PATH: String = "res://enemies/"
-const MOBS_PER_MAP = 0
+const MOBS_PER_MAP = 4
 const BOOS_PER_MAP = 1
 var enemyScene: PackedScene = load("%s" % GlobalHelper.SCENE_PATHS[GameEnums.SceneEnum.ENEMY])
 
 func _ready() -> void:
 	alreadyInstantiated = false
-	_loadEnemiesConfigs()
+	# some problem occurs when exporting the game probably related to access permissions the solution was to load the classes manually on on the array
+	#_loadEnemiesConfigs()
 
 func instantiateEnemies(parent: Node2D):
 	if !alreadyInstantiated:
@@ -83,10 +87,10 @@ func _spawnEnemiesByMap(parent: Node2D) -> void:
 	for i in range(MOBS_PER_MAP):
 		var enemy: Enemy = enemyScene.instantiate() as Enemy
 		var cfg: EnemyConfig = mobConfigs[randi() % mobConfigs.size()]
-		var position: Vector2 = positions.pop_front()
+		var position: Vector2 = positions.pop_front() / parent.scale
 		var id: String = "enemy%d" % i
 		var isBoss := false
-		
+
 		_appendEnemy(parent, enemy, cfg, id, position, isBoss)
 
 	for i in range(BOOS_PER_MAP):
@@ -95,7 +99,7 @@ func _spawnEnemiesByMap(parent: Node2D) -> void:
 		var position: Vector2 = positions.pop_front()
 		var id: String = "boss%d" % i
 		var isBoss := true
-		
+
 		_appendEnemy(parent, enemy, cfg, id, position, isBoss)
 
 func _getEnemiesPositionByMap() -> Array[Vector2]:
@@ -103,7 +107,7 @@ func _getEnemiesPositionByMap() -> Array[Vector2]:
 
 	match GlobalManager.currentMap:
 		GameEnums.MapEnum.MAP1:
-			positions = [Vector2(1, 1), Vector2(50, 50), Vector2(100, 100), Vector2(150, 150), Vector2(200, 200)]
+			positions = [Vector2(1632, 560), Vector2(3488, 2272), Vector2(4800, 1500), Vector2(4800, 2880), Vector2(4064, 540)]
 		GameEnums.MapEnum.MAP2:
 			positions = [Vector2(1, 1), Vector2(50, 50), Vector2(100, 100), Vector2(150, 150)]
 		GameEnums.MapEnum.MAP3:
@@ -112,7 +116,7 @@ func _getEnemiesPositionByMap() -> Array[Vector2]:
 			positions = [Vector2(1, 1), Vector2(50, 50), Vector2(100, 100), Vector2(150, 150)]
 
 	return positions
-	
+
 func _appendEnemy(parent, enemy, cfg, id, position, isBoss):
 	enemy.setupFromConfig(cfg)
 
