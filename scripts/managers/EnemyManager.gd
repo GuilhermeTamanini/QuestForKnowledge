@@ -107,9 +107,9 @@ func _getEnemiesPositionByMap() -> Array[Vector2]:
 
 	match GlobalManager.currentMap:
 		GameEnums.MapEnum.MAP1:
-			positions = [Vector2(1632, 560), Vector2(3488, 2272), Vector2(4800, 1500), Vector2(4800, 2880), Vector2(4064, 540)]
+			positions = [Vector2(1632, 560), Vector2(3488, 2272), Vector2(4800, 1500), Vector2(4800, 2780), Vector2(4064, 540)]
 		GameEnums.MapEnum.MAP2:
-			positions = [Vector2(1, 1), Vector2(50, 50), Vector2(100, 100), Vector2(150, 150)]
+			positions = [Vector2(1632, 560), Vector2(3488, 2272), Vector2(4800, 1500), Vector2(4800, 2880), Vector2(4064, 540)]
 		GameEnums.MapEnum.MAP3:
 			positions = [Vector2(1, 1), Vector2(50, 50), Vector2(100, 100), Vector2(150, 150)]
 		GameEnums.MapEnum.MAP4:

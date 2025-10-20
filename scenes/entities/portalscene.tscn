@@ -1,0 +1,82 @@
+[gd_scene load_steps=13 format=3 uid="uid://cyl8exsna71jj"]
+
+[ext_resource type="Script" uid="uid://bqumpvurl1nye" path="res://contracts/IPortal.gd" id="1_pqpna"]
+[ext_resource type="Texture2D" uid="uid://dxq6dgxnpmtsh" path="res://assets/Green Portal Sprite Sheet.png" id="4_38pft"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cdlpa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fq5rq"]
+atlas = ExtResource("4_38pft")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0eo8a"]
+atlas = ExtResource("4_38pft")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qk124"]
+atlas = ExtResource("4_38pft")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ha0i1"]
+atlas = ExtResource("4_38pft")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4esij"]
+atlas = ExtResource("4_38pft")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60rhq"]
+atlas = ExtResource("4_38pft")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j8hhj"]
+atlas = ExtResource("4_38pft")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6slu"]
+atlas = ExtResource("4_38pft")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qa2jx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fq5rq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0eo8a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qk124")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ha0i1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4esij")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60rhq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j8hhj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6slu")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Portalscene" type="Node2D"]
+
+[node name="PortalBody" type="CharacterBody2D" parent="."]
+script = ExtResource("1_pqpna")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PortalBody"]
+shape = SubResource("RectangleShape2D_cdlpa")
+
+[node name="PortalSprite" type="AnimatedSprite2D" parent="PortalBody"]
+sprite_frames = SubResource("SpriteFrames_qa2jx")
+animation = &"idle"

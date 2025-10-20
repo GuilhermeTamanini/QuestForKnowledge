@@ -43,6 +43,10 @@ func _physics_process(delta):
 	for i in range(get_slide_collision_count()):
 		var col = get_slide_collision(i).get_collider()
 
+		if col is IPortal:
+			GlobalManager.playerPosisionBeforeLastBattle = GlobalManager.playerDefaultPosision
+			col.interact()
+
 		if col is IEnemy:
 			col.interact()
 			GlobalManager.playerPosisionBeforeLastBattle = global_position

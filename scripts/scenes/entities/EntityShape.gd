@@ -1,9 +1,8 @@
 extends CollisionShape2D
 
-@onready var sprite_node: Sprite2D = get_parent().get_node("Sprite2D")
+@onready var animatedSprite2D: AnimatedSprite2D = get_parent().get_node("PortalSprite")
 
 func _ready():
-	if sprite_node and sprite_node.texture:
-		var objShape = RectangleShape2D.new()
-		objShape.extents = sprite_node.texture.get_size() * sprite_node.scale
-		shape = objShape
+	var objShape = RectangleShape2D.new()
+	objShape.extents = Vector2(32, 32)
+	shape = objShape

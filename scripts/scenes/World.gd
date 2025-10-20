@@ -7,14 +7,12 @@ extends Node2D
 @onready var quitButton: Button = $PauseLayer/PauseMenu/CenterContainer/VBoxContainer/QuitButton
 
 func _ready() -> void:
-	pauseMenu.visible = false
-	pauseMenu.process_mode = ProcessMode.PROCESS_MODE_ALWAYS
-	continueButton.process_mode = ProcessMode.PROCESS_MODE_ALWAYS
-	quitButton.process_mode = ProcessMode.PROCESS_MODE_ALWAYS
-	continueButton.pressed.connect(_onContinuePressed)
-	quitButton.pressed.connect(_onQuitPressed)
+	if GlobalManager.bossKilled:
+		var portalNode: Resource = load("res://scenes/entities/portalscene.tscn")
+		add_child(portalNode.instantiate())
 
-	# Criação do mapa e player
+	map.texture = load(GlobalHelper.getCurrentMapSprite());
+
 	createMapBorders()
 	var playerScene = load("res://scenes/entities/player.tscn")
 	var player: IPlayer = playerScene.instantiate()
@@ -40,24 +38,6 @@ func _ready() -> void:
 
 	EnemyManager.instantiateEnemies(self)
 
-func _input(event):
-	if event.is_action_pressed("ui_cancel"):
-		_togglePause()
-
-func _togglePause():
-	if get_tree().paused:
-		get_tree().paused = false
-	else:
-		get_tree().paused = true
-	pauseMenu.visible = get_tree().paused
-
-func _onContinuePressed():
-	get_tree().paused = false
-	pauseMenu.visible = false
-
-func _onQuitPressed():
-	get_tree().quit()
-
 func makeWall(position: Vector2, size: Vector2) -> StaticBody2D:
 	var wall = StaticBody2D.new()
 	var shape = RectangleShape2D.new()
@@ -69,19 +49,17 @@ func makeWall(position: Vector2, size: Vector2) -> StaticBody2D:
 	return wall
 
 func createMapBorders():
-	var map_size = Vector2(640, 480)
-	var scale = Vector2(8.953, 6.002)
-	var scaled_size = map_size * scale
+	var mapSize = Vector2(640, 480)
+	var mapScale = Vector2(8.953, 6.002)
+	var scaledSize = mapSize * mapScale
 	var thickness = 20
 
-	add_child(makeWall(Vector2(scaled_size.x/2, -thickness/2), Vector2(scaled_size.x, thickness))) # Superior
-	add_child(makeWall(Vector2(scaled_size.x/2, scaled_size.y + thickness/2), Vector2(scaled_size.x, thickness))) # Inferior
-	add_child(makeWall(Vector2(-thickness/2, scaled_size.y/2), Vector2(thickness, scaled_size.y))) # Esquerda
-	add_child(makeWall(Vector2(scaled_size.x + thickness/2, scaled_size.y/2) + Vector2(15, 15), Vector2(thickness, scaled_size.y))) # Direita
+	add_child(makeWall(Vector2(scaledSize.x / 2, -thickness / 2), Vector2(scaledSize.x, thickness))) # Up
+	add_child(makeWall(Vector2(scaledSize.x / 2, scaledSize.y + thickness / 2), Vector2(scaledSize.x, thickness))) # Down
+	add_child(makeWall(Vector2(-thickness / 2, scaledSize.y / 2), Vector2(thickness, scaledSize.y))) # Left
+	add_child(makeWall(Vector2(scaledSize.x + thickness / 2, scaledSize.y / 2) + Vector2(15, 15), Vector2(thickness, scaledSize.y))) # Right
 
 func setCameraLimits(camera: Camera2D) -> void:
-	var map_size = map.texture.get_size() * map.scale
-	var margin = 32
 	camera.limit_left = -800
 	camera.limit_top = 80
 	camera.limit_right = 4935

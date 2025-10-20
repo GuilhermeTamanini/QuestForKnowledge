@@ -12,6 +12,28 @@ const SCENE_PATHS: Dictionary = {
 	GameEnums.SceneEnum.END: "res://scenes/endgame.tscn"
 }
 
+const MAP_SPRITES: Dictionary = {
+	GameEnums.MapEnum.MAP1: "res://assets/sprites/map1.png",
+	GameEnums.MapEnum.MAP2: "res://assets/sprites/map2.jpg",
+	GameEnums.MapEnum.MAP3: "res://assets/sprites/map3.jpeg",
+	GameEnums.MapEnum.MAP4: "res://assets/sprites/map4.png"
+}
+
+func getCurrentMapSprite() -> String:
+	push_warning(MAP_SPRITES[GlobalManager.currentMap])
+	push_warning("currentMap: %d" % GlobalManager.currentMap)
+	return MAP_SPRITES[GlobalManager.currentMap]
+
+func setCurrentMap() -> void:
+	if !GlobalManager.bossKilled:
+		return
+		
+	GlobalManager.bossKilled = false
+	GlobalManager.currentMapVal += 1
+	var all_maps = GameEnums.MapEnum.values()
+	if GlobalManager.currentMapVal < all_maps.size():
+		GlobalManager.currentMap = all_maps[GlobalManager.currentMapVal]
+
 func changeSceneTo(scene: GameEnums.SceneEnum) -> void:
 	get_tree().change_scene_to_file(SCENE_PATHS[scene])
 

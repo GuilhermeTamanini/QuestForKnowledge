@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvyyud1qogare"
-path="res://.godot/imported/mapateste.png-e27825314195eda6848ddef1bd1ed7b4.ctex"
+uid="uid://so5j47ek5psg"
+path="res://.godot/imported/portalsolo.png-bd304c1f1e54e207ba6504b853e6174f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/mapateste.png"
-dest_files=["res://.godot/imported/mapateste.png-e27825314195eda6848ddef1bd1ed7b4.ctex"]
+source_file="res://assets/sprites/portalsolo.png"
+dest_files=["res://.godot/imported/portalsolo.png-bd304c1f1e54e207ba6504b853e6174f.ctex"]
 
 [params]
 

@@ -50,7 +50,7 @@ func pushPlayerAway():
 
 func showBossWarning():
 	var lbl := Label.new()
-	lbl.position = GlobalManager.currentPlayer.global_position + Vector2(0, -50)
+	lbl.position = GlobalManager.currentPlayer.global_position + Vector2(0, 50)
 	lbl.text = "Mate todos os mobs primeiro!"
 	lbl.add_theme_color_override("font_color", Color(1, 0, 0))
 	lbl.add_theme_font_size_override("font_size", 32)
