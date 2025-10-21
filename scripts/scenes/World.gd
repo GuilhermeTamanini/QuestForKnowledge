@@ -38,14 +38,16 @@ func _ready() -> void:
 
 	EnemyManager.instantiateEnemies(self)
 
-func makeWall(position: Vector2, size: Vector2) -> StaticBody2D:
+	MusicManager.playMusic(GameEnums.MusicEnum.OVERWORLD)
+
+func makeWall(pos: Vector2, size: Vector2) -> StaticBody2D:
 	var wall = StaticBody2D.new()
 	var shape = RectangleShape2D.new()
 	shape.size = size
 	var collision = CollisionShape2D.new()
 	collision.shape = shape
 	wall.add_child(collision)
-	wall.position = position
+	wall.position = pos
 	return wall
 
 func createMapBorders():

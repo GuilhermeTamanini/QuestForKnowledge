@@ -39,7 +39,9 @@ func changeSceneTo(scene: GameEnums.SceneEnum) -> void:
 
 func gameOver() -> void: changeSceneTo(GameEnums.SceneEnum.GAMEOVER)
 
-func startCombat() -> void: changeSceneTo(GameEnums.SceneEnum.COMBAT)
+func startCombat() -> void: 
+	changeSceneTo(GameEnums.SceneEnum.COMBAT)
+	MusicManager.playMusic(GameEnums.MusicEnum.BATTLE)
 
 func goToWorld() -> void: changeSceneTo(GameEnums.SceneEnum.WORLD)
 

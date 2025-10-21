@@ -21,6 +21,7 @@ GlobalManager="*res://scripts/managers/GlobalManager.gd"
 GlobalHelper="*res://scripts/globals/GlobalHelper.gd"
 GameEnums="*res://scripts/globals/GameEnums.gd"
 EnemyManager="*res://scripts/managers/EnemyManager.gd"
+MusicManager="*res://scripts/managers/MusicManager.gd"
 
 [dotnet]
 
