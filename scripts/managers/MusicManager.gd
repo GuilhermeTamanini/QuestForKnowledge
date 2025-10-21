@@ -13,7 +13,7 @@ func _ready():
 	add_child(musicPlayer)
 	musicPlayer.bus = "Music"
 
-func playMusic(music: GameEnums.MusicEnum, loop: bool = true):
+func playMusic(music: GameEnums.MusicEnum):
 	var stream = MUSICS_PATH.get(music, null)
 	if stream == null:
 		push_warning("Music not found: %s" % music)

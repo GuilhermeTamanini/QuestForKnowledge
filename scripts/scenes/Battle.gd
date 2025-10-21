@@ -65,7 +65,7 @@ func _onOptionPressed(selected_index):
 		enemyHealth -= GlobalManager.DAMAGE
 		$MarginContainer/VBoxContainer/StatusLabel.text = "Acertou! Causou %d de dano." % GlobalManager.DAMAGE
 		if enemyHealth <= 0:
-			if isBoss: 
+			if isBoss:
 				GlobalHelper.clearManagers()
 				GlobalManager.bossKilled = true
 				GlobalHelper.changeSceneTo(GameEnums.SceneEnum.WORLD)
@@ -78,7 +78,7 @@ func _onOptionPressed(selected_index):
 			#GlobalHelper.gameOver()
 		enemyHealth -= GlobalManager.DAMAGE
 		if enemyHealth <= 0:
-			if isBoss: 
+			if isBoss:
 				GlobalHelper.clearManagers()
 				GlobalManager.bossKilled = true
 				GlobalHelper.changeSceneTo(GameEnums.SceneEnum.WORLD)

@@ -1,6 +1,5 @@
 extends Control
 
-@onready var startButton: Button = $CenterContainer/StartButton
 @onready var continueButton: Button = $CenterContainer/ContinueButton
 @onready var quitButton: Button = $CenterContainer/QuitButton
 

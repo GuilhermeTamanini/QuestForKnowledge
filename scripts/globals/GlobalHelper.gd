@@ -27,7 +27,7 @@ func getCurrentMapSprite() -> String:
 func setCurrentMap() -> void:
 	if !GlobalManager.bossKilled:
 		return
-		
+
 	GlobalManager.bossKilled = false
 	GlobalManager.currentMapVal += 1
 	var all_maps = GameEnums.MapEnum.values()
@@ -39,7 +39,7 @@ func changeSceneTo(scene: GameEnums.SceneEnum) -> void:
 
 func gameOver() -> void: changeSceneTo(GameEnums.SceneEnum.GAMEOVER)
 
-func startCombat() -> void: 
+func startCombat() -> void:
 	changeSceneTo(GameEnums.SceneEnum.COMBAT)
 	MusicManager.playMusic(GameEnums.MusicEnum.BATTLE)
 
@@ -57,4 +57,3 @@ func clearManagers() -> void:
 	GlobalManager.playerPosisionBeforeLastBattle = Vector2(400, 400)
 	EnemyManager.alreadyInstantiated = false
 	EnemyManager.enemies = []
-	

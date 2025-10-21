@@ -18,9 +18,9 @@ func setupFromConfig(config: CharacterConfig):
 
 	if spriteNode and config.sprite:
 		spriteNode.texture = config.sprite
-		_normalizeSprite(spriteNode)
+		_normalizeSprite()
 
-func _normalizeSprite(spriteNode: Sprite2D) -> void:
+func _normalizeSprite() -> void:
 	var textureSize = spriteNode.texture.get_size()
 	if textureSize == Vector2.ZERO:
 		return
@@ -35,7 +35,7 @@ func _normalizeSprite(spriteNode: Sprite2D) -> void:
 
 	add_child(collision)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	handle_input()
 	velocity = vel
 	move_and_slide()

@@ -6,7 +6,7 @@ var currentPlayer: Player
 var currentEnemyId: String
 var playerSprite: CharacterConfig
 var currentMap: GameEnums.MapEnum = GameEnums.MapEnum.MAP1
-var currentMapVal: int = 1
+var currentMapVal: int = 0
 var playerDefaultPosision: Vector2 = Vector2(400, 400)
 var playerPosisionBeforeLastBattle: Vector2 = playerDefaultPosision
 var bossKilled: bool = false;
