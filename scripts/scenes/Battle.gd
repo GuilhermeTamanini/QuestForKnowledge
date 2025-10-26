@@ -62,32 +62,27 @@ func _showQuestion():
 
 func _onOptionPressed(selected_index):
 	if selected_index == current_answer:
-		enemyHealth -= GlobalManager.DAMAGE
 		$MarginContainer/VBoxContainer/StatusLabel.text = "Acertou! Causou %d de dano." % GlobalManager.DAMAGE
-		if enemyHealth <= 0:
-			if isBoss:
-				GlobalHelper.clearManagers()
-				GlobalManager.bossKilled = true
-				GlobalHelper.changeSceneTo(GameEnums.SceneEnum.WORLD)
-				return
-			EnemyManager.removeEnemy(enemy["id"])
-	else:
-		#playerHealth -= GlobalManager.DAMAGE
-		#if playerHealth <= 0:
-			#GlobalHelper.clearManagers()
-			#GlobalHelper.gameOver()
+		
 		enemyHealth -= GlobalManager.DAMAGE
-		if enemyHealth <= 0:
-			if isBoss:
-				GlobalHelper.clearManagers()
-				GlobalManager.bossKilled = true
-				GlobalHelper.changeSceneTo(GameEnums.SceneEnum.WORLD)
-				return
-			EnemyManager.removeEnemy(enemy["id"])
+		_updateStatus()
+		if enemyHealth > 0:
+			_showQuestion()
+			return
+		if isBoss:
+			GlobalHelper.killBoss()
+			return
+		EnemyManager.removeEnemy(enemy["id"])
+	else:
+		playerHealth -= GlobalManager.DAMAGE
 		$MarginContainer/VBoxContainer/StatusLabel.text = "Errou! Você recebeu %d de dano." % GlobalManager.DAMAGE
+		_updateStatus()
+		if playerHealth > 0:
+			_showQuestion()
+			return
 
-	_updateStatus()
-	_showQuestion()
+		GlobalHelper.clearManagers()
+		GlobalHelper.gameOver()
 
 func _updateStatus():
 	$MarginContainer/VBoxContainer/StatusLabel.text += "\nPlayer HP: %d | Inimigo HP: %d" % [

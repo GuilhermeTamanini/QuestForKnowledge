@@ -1,3 +1,4 @@
+### GlobalHelper
 extends Node
 
 var worldInitialized: bool = false
@@ -13,15 +14,13 @@ const SCENE_PATHS: Dictionary = {
 }
 
 const MAP_SPRITES: Dictionary = {
-	GameEnums.MapEnum.MAP1: "res://assets/sprites/map1.png",
-	GameEnums.MapEnum.MAP2: "res://assets/sprites/map2.jpg",
-	GameEnums.MapEnum.MAP3: "res://assets/sprites/map3.jpeg",
-	GameEnums.MapEnum.MAP4: "res://assets/sprites/map4.png"
+	GameEnums.MapEnum.MAP1: "res://assets/sprites/maps/map1.png",
+	GameEnums.MapEnum.MAP2: "res://assets/sprites/maps/map2.jpg",
+	GameEnums.MapEnum.MAP3: "res://assets/sprites/maps/map3.jpeg",
+	GameEnums.MapEnum.MAP4: "res://assets/sprites/maps/map4.png"
 }
 
 func getCurrentMapSprite() -> String:
-	push_warning(MAP_SPRITES[GlobalManager.currentMap])
-	push_warning("currentMap: %d" % GlobalManager.currentMap)
 	return MAP_SPRITES[GlobalManager.currentMap]
 
 func setCurrentMap() -> void:
@@ -29,15 +28,18 @@ func setCurrentMap() -> void:
 		return
 
 	GlobalManager.bossKilled = false
-	GlobalManager.currentMapVal += 1
-	var all_maps = GameEnums.MapEnum.values()
-	if GlobalManager.currentMapVal < all_maps.size():
-		GlobalManager.currentMap = all_maps[GlobalManager.currentMapVal]
+	GlobalManager.currentMapVal = GlobalManager.currentMapVal + 1
+	var allMaps = GameEnums.MapEnum.values()
+
+	if GlobalManager.currentMapVal < allMaps.size():
+		GlobalManager.currentMap = allMaps[GlobalManager.currentMapVal]
 
 func changeSceneTo(scene: GameEnums.SceneEnum) -> void:
 	get_tree().change_scene_to_file(SCENE_PATHS[scene])
 
-func gameOver() -> void: changeSceneTo(GameEnums.SceneEnum.GAMEOVER)
+func gameOver() -> void: 
+	changeSceneTo(GameEnums.SceneEnum.GAMEOVER)
+	MusicManager.stopMusic()
 
 func startCombat() -> void:
 	changeSceneTo(GameEnums.SceneEnum.COMBAT)
@@ -49,8 +51,21 @@ func goToMenu() -> void: changeSceneTo(GameEnums.SceneEnum.MENU)
 
 func endGame() -> void: changeSceneTo(GameEnums.SceneEnum.END)
 
+func killBoss() -> void:
+	GlobalManager.bossKilled = true
+	GlobalManager.bossCounter -= 1
+	EnemyManager.alreadyInstantiated = false
+
+	if GlobalManager.bossCounter == 0:
+		clearManagers()
+		endGame()
+	else:
+		goToWorld()
+
 func clearManagers() -> void:
 	GlobalManager.currentEnemyId = ""
+	GlobalManager.bossCounter = 4
+	GlobalManager.bossKilled = false
 	GlobalManager.currentMap = GameEnums.MapEnum.MAP1
 	GlobalManager.currentPlayer = null
 	GlobalManager.playerSprite = null

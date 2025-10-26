@@ -3,6 +3,7 @@
 extends Node
 
 var currentPlayer: Player
+var bossCounter: int = 4
 var currentEnemyId: String
 var playerSprite: CharacterConfig
 var currentMap: GameEnums.MapEnum = GameEnums.MapEnum.MAP1

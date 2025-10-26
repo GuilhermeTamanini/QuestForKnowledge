@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://cyl8exsna71jj"]
 
 [ext_resource type="Script" uid="uid://bqumpvurl1nye" path="res://contracts/IPortal.gd" id="1_pqpna"]
-[ext_resource type="Texture2D" uid="uid://dxq6dgxnpmtsh" path="res://assets/Green Portal Sprite Sheet.png" id="4_38pft"]
+[ext_resource type="Texture2D" uid="uid://dxq6dgxnpmtsh" path="res://assets/sprites/portal/Green Portal Sprite Sheet.png" id="4_38pft"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cdlpa"]
 

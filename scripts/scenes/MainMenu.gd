@@ -7,9 +7,7 @@ func _ready():
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
 	continueButton.pressed.connect(_continuePressed)
-
-func _startNewGame():
-	GlobalHelper.changeSceneTo(GameEnums.SceneEnum.WORLD)
+	quitButton.pressed.connect(_quitGame)
 
 func _continuePressed():
 	GlobalHelper.changeSceneTo(GameEnums.SceneEnum.WORLD)

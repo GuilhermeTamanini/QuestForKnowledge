@@ -4,8 +4,8 @@ extends Node
 var enemies: Array[Dictionary] = []
 var alreadyInstantiated: bool = false
 var configs: Array[EnemyConfig] = [
-	preload("res://enemies/Slime.tres"),
-	preload("res://enemies/SlimeBoss.tres")
+	preload("res://resources/enemies/map1/Slime.tres"),
+	preload("res://resources/enemies/map1/SlimeBoss.tres")
 ]
 const ENEMIES_CONFIG_PATH: String = "res://enemies/"
 const MOBS_PER_MAP = 4

@@ -11,7 +11,7 @@ func _ready() -> void:
 
 	var playerScene = load("res://scenes/entities/player.tscn")
 	var player: IPlayer = playerScene.instantiate()
-	var characterCfg: CharacterConfig = load("res://characters/Test.tres")
+	var characterCfg: CharacterConfig = load("res://resources/player/Player.tres")
 	player.setupFromConfig(characterCfg)
 	add_child(player)
 	player.global_position = GlobalManager.playerPosisionBeforeLastBattle
@@ -27,8 +27,8 @@ func _ready() -> void:
 	camera.position_smoothing_enabled = true
 	camera.position_smoothing_speed = 5.0
 	camera.zoom = Vector2(0.5, 0.5)
-	setCameraLimits(camera)
-	createMapBorders()
+	_setCameraLimits(camera)
+	_createMapBorders()
 
 	MusicManager.playMusic(GameEnums.MusicEnum.OVERWORLD)
 
@@ -38,7 +38,7 @@ func _ready() -> void:
 	else:
 		EnemyManager.instantiateEnemies(self)
 
-func makeWall(pos: Vector2, size: Vector2) -> StaticBody2D:
+func _makeWall(pos: Vector2, size: Vector2) -> StaticBody2D:
 	var wall = StaticBody2D.new()
 	var shape = RectangleShape2D.new()
 	shape.size = size
@@ -48,18 +48,18 @@ func makeWall(pos: Vector2, size: Vector2) -> StaticBody2D:
 	wall.position = pos
 	return wall
 
-func createMapBorders():
+func _createMapBorders():
 	var mapSize = Vector2(640, 480)
 	var mapScale = Vector2(8.953, 6.002)
 	var scaledSize = mapSize * mapScale
 	var thickness = 20
 
-	add_child(makeWall(Vector2(scaledSize.x / 2.0, -thickness / 2.0), Vector2(scaledSize.x, thickness))) # Up
-	add_child(makeWall(Vector2(scaledSize.x / 2.0, scaledSize.y + thickness / 2.0), Vector2(scaledSize.x, thickness))) # Down
-	add_child(makeWall(Vector2(-thickness / 2.0, scaledSize.y / 2.0), Vector2(thickness, scaledSize.y))) # Left
-	add_child(makeWall(Vector2(scaledSize.x + thickness / 2.0, scaledSize.y / 2.0) + Vector2(15, 15), Vector2(thickness, scaledSize.y))) # Right
+	add_child(_makeWall(Vector2(scaledSize.x / 2.0, -thickness / 2.0), Vector2(scaledSize.x, thickness))) # Up
+	add_child(_makeWall(Vector2(scaledSize.x / 2.0, scaledSize.y + thickness / 2.0), Vector2(scaledSize.x, thickness))) # Down
+	add_child(_makeWall(Vector2(-thickness / 2.0, scaledSize.y / 2.0), Vector2(thickness, scaledSize.y))) # Left
+	add_child(_makeWall(Vector2(scaledSize.x + thickness / 2.0, scaledSize.y / 2.0) + Vector2(15, 15), Vector2(thickness, scaledSize.y))) # Right
 
-func setCameraLimits(camera: Camera2D) -> void:
+func _setCameraLimits(camera: Camera2D) -> void:
 	camera.limit_left = -800
 	camera.limit_top = 80
 	camera.limit_right = 4935

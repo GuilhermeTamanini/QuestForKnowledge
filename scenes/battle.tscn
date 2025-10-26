@@ -4,7 +4,12 @@
 
 [node name="Battle" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchor_left = 0.431
+anchor_top = 0.363
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_dn72j")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

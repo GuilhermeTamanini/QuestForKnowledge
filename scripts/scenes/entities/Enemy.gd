@@ -42,13 +42,13 @@ func _normalizeSprite(sprite: Sprite2D) -> void:
 
 	add_child(collision)
 
-func pushPlayerAway():
+func _pushPlayerAway():
 	var player = GlobalManager.currentPlayer
 	if player:
 		var dir = (player.global_position - global_position).normalized()
 		player.global_position += dir * 64
 
-func showBossWarning():
+func _showBossWarning():
 	var lbl := Label.new()
 	lbl.position = GlobalManager.currentPlayer.global_position + Vector2(0, 50)
 	lbl.text = "Mate todos os mobs primeiro!"
@@ -68,26 +68,15 @@ func showBossWarning():
 
 func pauseGameForWarning():
 	get_tree().paused = true
-	showBossWarning()
+	_showBossWarning()
 	await get_tree().create_timer(2.0).timeout
 	get_tree().paused = false
 
 func interact() -> void:
 	if isBoss and not EnemyManager.canChallengeBoss():
-		pushPlayerAway()
+		_pushPlayerAway()
 		await pauseGameForWarning()
 		return
 
 	GlobalManager.currentEnemyId = id
 	GlobalHelper.startCombat()
-
-#func _physics_process(delta):
-	#if isBoss: return
-	#timer += delta
-#
-	#if timer >= move_time:
-		#timer = 0.0
-		#current_dir_index = (current_dir_index + 1) % directions.size()
-#
-	#velocity = directions[current_dir_index] * SPEED
-	#move_and_slide()
