@@ -70,5 +70,6 @@ func clearManagers() -> void:
 	GlobalManager.currentPlayer = null
 	GlobalManager.playerSprite = null
 	GlobalManager.playerPosisionBeforeLastBattle = Vector2(400, 400)
+	GlobalManager.gameQuestions = GlobalManager.defaultQuestions
 	EnemyManager.alreadyInstantiated = false
 	EnemyManager.enemies = []

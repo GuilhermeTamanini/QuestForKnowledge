@@ -19,21 +19,20 @@ offset_bottom = 40.0
 alignment = 1
 
 [node name="TitleLabel" type="Label" parent="CenterContainer"]
+custom_minimum_size = Vector2(9, 50)
 layout_mode = 2
 text = "Quest for Knowledge: the battle of wits!"
+
+[node name="MsgLabel" type="Label" parent="CenterContainer"]
+layout_mode = 2
 
 [node name="ContinueButton" type="Button" parent="CenterContainer"]
 layout_mode = 2
 text = "Iniciar"
 
-[node name="SavedPlayerList" type="VBoxContainer" parent="CenterContainer"]
+[node name="FormButton" type="Button" parent="CenterContainer"]
 layout_mode = 2
-
-[node name="CharacterContainer" type="VBoxContainer" parent="CenterContainer"]
-layout_mode = 2
-
-[node name="ErrorLabel" type="Label" parent="CenterContainer"]
-layout_mode = 2
+text = "Link para o forms"
 
 [node name="QuitButton" type="Button" parent="CenterContainer"]
 layout_mode = 2

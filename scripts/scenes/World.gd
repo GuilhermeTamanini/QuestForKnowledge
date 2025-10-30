@@ -11,12 +11,9 @@ func _ready() -> void:
 
 	var playerScene = load("res://scenes/entities/player.tscn")
 	var player: IPlayer = playerScene.instantiate()
-	var characterCfg: CharacterConfig = load("res://resources/player/Player.tres")
-	player.setupFromConfig(characterCfg)
 	add_child(player)
 	player.global_position = GlobalManager.playerPosisionBeforeLastBattle
 
-	GlobalManager.playerSprite = characterCfg
 	GlobalManager.currentPlayer = player
 
 	# without player position it doesn't appears - need fix

@@ -3,37 +3,14 @@ extends IPlayer
 
 class_name Player
 
-@export var speed: float = 2000
-var spriteNode: Sprite2D
+@export var speed: float = 3000
+@onready var playerSprite: AnimatedSprite2D = $AnimatedSprite2D
 var vel: Vector2 = Vector2.ZERO
 var characterName: String
-var sprite: Texture2D
-const PLAYER_SIZE: Vector2 = Vector2(100, 100)
+const PLAYER_SIZE: Vector2 = Vector2(4, 4)
 
-func setupFromConfig(config: CharacterConfig):
-	characterName = config.name
-	health = config.health
-
-	spriteNode = $Sprite2D
-
-	if spriteNode and config.sprite:
-		spriteNode.texture = config.sprite
-		_normalizeSprite()
-
-func _normalizeSprite() -> void:
-	var textureSize = spriteNode.texture.get_size()
-	if textureSize == Vector2.ZERO:
-		return
-
-	spriteNode.scale = PLAYER_SIZE / textureSize
-
-	var rectShape = RectangleShape2D.new()
-	rectShape.extents = PLAYER_SIZE / 2
-
-	var collision = CollisionShape2D.new()
-	collision.shape = rectShape
-
-	add_child(collision)
+func _ready() -> void:
+	playerSprite.scale = PLAYER_SIZE
 
 func _physics_process(_delta):
 	handle_input()
@@ -53,8 +30,20 @@ func _physics_process(_delta):
 
 func handle_input():
 	vel = Vector2.ZERO
-	if Input.is_action_pressed("ui_right"): vel.x += 1
-	if Input.is_action_pressed("ui_left"): vel.x -= 1
-	if Input.is_action_pressed("ui_down"): vel.y += 1
-	if Input.is_action_pressed("ui_up"): vel.y -= 1
+
+	if Input.is_action_pressed("ui_right"):
+		playerSprite.play("moveRight")
+		vel.x += 1
+	elif Input.is_action_pressed("ui_left"):
+		playerSprite.play("moveLeft")
+		vel.x -= 1
+	elif Input.is_action_pressed("ui_down"):
+		playerSprite.play("moveDown")
+		vel.y += 1
+	elif Input.is_action_pressed("ui_up"):
+		playerSprite.play("moveUp")
+		vel.y -= 1
+	else:
+		playerSprite.play("idle")
+
 	vel = vel.normalized() * speed

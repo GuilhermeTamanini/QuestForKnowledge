@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyConfig" load_steps=3 format=3 uid="uid://8x7yn0r4aa40"]
+
+[ext_resource type="Script" uid="uid://btky2via55uh2" path="res://scripts/configs/EnemyConfig.gd" id="1_i1ybk"]
+[ext_resource type="Texture2D" uid="uid://t5c420gkslcq" path="res://assets/sprites/enemies/slime3.png" id="2_e6f4x"]
+
+[resource]
+script = ExtResource("1_i1ybk")
+name = "Slime3"
+dangerLevel = 0
+health = 20
+sprite = ExtResource("2_e6f4x")
+map = 2
+metadata/_custom_type_script = "uid://btky2via55uh2"

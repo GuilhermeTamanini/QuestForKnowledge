@@ -63,34 +63,45 @@ func _showQuestion():
 func _onOptionPressed(selected_index):
 	if selected_index == current_answer:
 		$MarginContainer/VBoxContainer/StatusLabel.text = "Acertou! Causou %d de dano." % GlobalManager.DAMAGE
-		
+
 		enemyHealth -= GlobalManager.DAMAGE
+
 		_updateStatus()
 		if enemyHealth > 0:
 			_showQuestion()
 			return
 		if isBoss:
+			EnemyManager.removeEnemy(enemy["id"])
 			GlobalHelper.killBoss()
 			return
 		EnemyManager.removeEnemy(enemy["id"])
 	else:
-		playerHealth -= GlobalManager.DAMAGE
 		$MarginContainer/VBoxContainer/StatusLabel.text = "Errou! Você recebeu %d de dano." % GlobalManager.DAMAGE
+
+		enemyHealth -= GlobalManager.DAMAGE
+
 		_updateStatus()
-		if playerHealth > 0:
+		if enemyHealth > 0:
 			_showQuestion()
 			return
+		if isBoss:
+			EnemyManager.removeEnemy(enemy["id"])
+			GlobalHelper.killBoss()
+			return
+		EnemyManager.removeEnemy(enemy["id"])
 
-		GlobalHelper.clearManagers()
-		GlobalHelper.gameOver()
+		#playerHealth -= GlobalManager.DAMAGE
+
+		#_updateStatus()
+		#if playerHealth > 0:
+			#_showQuestion()
+			#return
+#
+		#GlobalHelper.clearManagers()
+		#GlobalHelper.gameOver()
 
 func _updateStatus():
 	$MarginContainer/VBoxContainer/StatusLabel.text += "\nPlayer HP: %d | Inimigo HP: %d" % [
 		playerHealth,
 		enemyHealth
 	]
-
-func _disable_buttons():
-	var options_box = $MarginContainer/VBoxContainer/Options
-	for child in options_box.get_children():
-		child.disabled = true

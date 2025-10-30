@@ -47,6 +47,10 @@ text = "Jogo pausado!"
 layout_mode = 2
 text = "Continuar"
 
+[node name="MenuButton" type="Button" parent="PauseLayer/PauseMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Menu"
+
 [node name="QuitButton" type="Button" parent="PauseLayer/PauseMenu/CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Sair "

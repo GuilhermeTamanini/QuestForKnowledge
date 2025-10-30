@@ -5,10 +5,16 @@ var enemies: Array[Dictionary] = []
 var alreadyInstantiated: bool = false
 var configs: Array[EnemyConfig] = [
 	preload("res://resources/enemies/map1/Slime.tres"),
-	preload("res://resources/enemies/map1/SlimeBoss.tres")
+	preload("res://resources/enemies/map1/SlimeBoss.tres"),
+	preload("res://resources/enemies/map2/ForestBoss.tres"),
+	preload("res://resources/enemies/map2/Goblin.tres"),
+	preload("res://resources/enemies/map3/Slime3.tres"),
+	preload("res://resources/enemies/map3/MageBoss.tres"),
+	preload("res://resources/enemies/map4/MageBoss4.tres"),
+	preload("res://resources/enemies/map4/Goblin4.tres"),
 ]
 const ENEMIES_CONFIG_PATH: String = "res://enemies/"
-const MOBS_PER_MAP = 4
+const MOBS_PER_MAP = 1
 const BOOS_PER_MAP = 1
 var enemyScene: PackedScene = load("%s" % GlobalHelper.SCENE_PATHS[GameEnums.SceneEnum.ENEMY])
 
@@ -81,8 +87,16 @@ func _respawnMobsInMap(parent: Node2D) -> void:
 
 func _spawnEnemiesByMap(parent: Node2D) -> void:
 	var positions: Array[Vector2] = _getEnemiesPositionByMap()
-	var mobConfigs: Array[EnemyConfig] = configs.filter(func(cfg): return cfg.dangerLevel == GameEnums.DangerLevel.MOB)
-	var bossConfig: Array[EnemyConfig] = configs.filter(func(cfg): return cfg.dangerLevel == GameEnums.DangerLevel.BOSS)
+	var mobConfigs: Array[EnemyConfig] = configs.filter(
+		func(cfg): return cfg.dangerLevel == GameEnums.DangerLevel.MOB
+	).filter(
+		func(cfg): return cfg.map == GlobalManager.currentMap
+	)
+	var bossConfig: Array[EnemyConfig] = configs.filter(
+		func(cfg): return cfg.dangerLevel == GameEnums.DangerLevel.BOSS
+	).filter(
+		func(cfg): return cfg.map == GlobalManager.currentMap
+	)
 
 	for i in range(MOBS_PER_MAP):
 		var enemy: Enemy = enemyScene.instantiate() as Enemy
@@ -111,9 +125,9 @@ func _getEnemiesPositionByMap() -> Array[Vector2]:
 		GameEnums.MapEnum.MAP2:
 			positions = [Vector2(1632, 560), Vector2(3488, 2272), Vector2(4800, 1500), Vector2(4800, 2880), Vector2(4064, 540)]
 		GameEnums.MapEnum.MAP3:
-			positions = [Vector2(1, 1), Vector2(50, 50), Vector2(100, 100), Vector2(150, 150)]
+			positions = [Vector2(1632, 560), Vector2(3488, 2272), Vector2(4800, 1500), Vector2(4800, 2880), Vector2(4064, 540)]
 		GameEnums.MapEnum.MAP4:
-			positions = [Vector2(1, 1), Vector2(50, 50), Vector2(100, 100), Vector2(150, 150)]
+			positions = [Vector2(1632, 560), Vector2(3488, 2272), Vector2(4800, 1500), Vector2(4800, 2880), Vector2(4064, 540)]
 
 	return positions
 

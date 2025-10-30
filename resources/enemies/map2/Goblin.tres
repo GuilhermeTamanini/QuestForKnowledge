@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyConfig" load_steps=3 format=3 uid="uid://bvny4flg1c5lj"]
+
+[ext_resource type="Script" uid="uid://btky2via55uh2" path="res://scripts/configs/EnemyConfig.gd" id="1_47oc1"]
+[ext_resource type="Texture2D" uid="uid://cwowgrc13iu80" path="res://assets/sprites/enemies/goblin.png" id="2_jyu5t"]
+
+[resource]
+script = ExtResource("1_47oc1")
+name = "goblin"
+dangerLevel = 0
+health = 20
+sprite = ExtResource("2_jyu5t")
+map = 1
+metadata/_custom_type_script = "uid://btky2via55uh2"

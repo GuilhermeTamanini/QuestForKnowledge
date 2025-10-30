@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvyyud1qogare"
-path="res://.godot/imported/mapateste.png-033de0cb930dad652f4cc10dae155bf1.ctex"
+uid="uid://dglfbkrgv6c8g"
+path="res://.godot/imported/MoveLeft.png-d8b245afdb44829fd3c8c65bd754bdfb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/maps/mapateste.png"
-dest_files=["res://.godot/imported/mapateste.png-033de0cb930dad652f4cc10dae155bf1.ctex"]
+source_file="res://assets/sprites/player/MoveLeft.png"
+dest_files=["res://.godot/imported/MoveLeft.png-d8b245afdb44829fd3c8c65bd754bdfb.ctex"]
 
 [params]
 

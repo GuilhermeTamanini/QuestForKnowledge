@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_p6h04")
-name = "Slime"
+name = "SlimeBoss"
 dangerLevel = 1
 health = 40
 sprite = ExtResource("2_iws7p")

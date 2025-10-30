@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyConfig" load_steps=3 format=3 uid="uid://cxml7xwiwdexi"]
+
+[ext_resource type="Script" uid="uid://btky2via55uh2" path="res://scripts/configs/EnemyConfig.gd" id="1_nqqux"]
+[ext_resource type="Texture2D" uid="uid://bgbcardp2ro6x" path="res://assets/sprites/enemies/MageBoss4.png" id="2_1kpgr"]
+
+[resource]
+script = ExtResource("1_nqqux")
+name = "MageBoss4"
+dangerLevel = 1
+health = 40
+sprite = ExtResource("2_1kpgr")
+map = 3
+metadata/_custom_type_script = "uid://btky2via55uh2"

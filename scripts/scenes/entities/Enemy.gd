@@ -10,7 +10,7 @@ var directions = [Vector2.UP, Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT]
 var current_dir_index = 0
 var move_time = 1.5
 var timer = 0
-const MOB_SIZE = Vector2(100, 100)
+const MOB_SIZE = Vector2(120, 120)
 const BOSS_SIZE = Vector2(256, 256)
 var isBoss := false
 

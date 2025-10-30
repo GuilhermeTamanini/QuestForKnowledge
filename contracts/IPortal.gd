@@ -10,7 +10,7 @@ func _ready():
 	$PortalSprite.z_index = 10
 
 	var objShape = RectangleShape2D.new()
-	objShape.extents = Vector2(32, 32)
+	objShape.extents = Vector2(64, 64)
 	$CollisionShape2D.shape = objShape
 
 func interact() -> void:
