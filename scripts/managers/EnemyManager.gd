@@ -14,7 +14,7 @@ var configs: Array[EnemyConfig] = [
 	preload("res://resources/enemies/map4/Goblin4.tres"),
 ]
 const ENEMIES_CONFIG_PATH: String = "res://enemies/"
-const MOBS_PER_MAP = 1
+const MOBS_PER_MAP = 4
 const BOOS_PER_MAP = 1
 var enemyScene: PackedScene = load("%s" % GlobalHelper.SCENE_PATHS[GameEnums.SceneEnum.ENEMY])
 
@@ -121,13 +121,13 @@ func _getEnemiesPositionByMap() -> Array[Vector2]:
 
 	match GlobalManager.currentMap:
 		GameEnums.MapEnum.MAP1:
-			positions = [Vector2(1632, 560), Vector2(3488, 2272), Vector2(4800, 1500), Vector2(4800, 2780), Vector2(4064, 540)]
+			positions = [Vector2(1632, 560), Vector2(3488, 2272), Vector2(4500, 1500), Vector2(4500, 2700), Vector2(4064, 540)]
 		GameEnums.MapEnum.MAP2:
-			positions = [Vector2(1632, 560), Vector2(3488, 2272), Vector2(4800, 1500), Vector2(4800, 2880), Vector2(4064, 540)]
+			positions = [Vector2(1632, 560), Vector2(3488, 2272), Vector2(4500, 1500), Vector2(4500, 2700), Vector2(4064, 540)]
 		GameEnums.MapEnum.MAP3:
-			positions = [Vector2(1632, 560), Vector2(3488, 2272), Vector2(4800, 1500), Vector2(4800, 2880), Vector2(4064, 540)]
+			positions = [Vector2(1632, 560), Vector2(3488, 2272), Vector2(4500, 1500), Vector2(4500, 2700), Vector2(4064, 540)]
 		GameEnums.MapEnum.MAP4:
-			positions = [Vector2(1632, 560), Vector2(3488, 2272), Vector2(4800, 1500), Vector2(4800, 2880), Vector2(4064, 540)]
+			positions = [Vector2(1632, 560), Vector2(3488, 2272), Vector2(4500, 1500), Vector2(4500, 2700), Vector2(4064, 540)]
 
 	return positions
 

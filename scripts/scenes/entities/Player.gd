@@ -3,7 +3,7 @@ extends IPlayer
 
 class_name Player
 
-@export var speed: float = 3000
+@export var speed: float = 550
 @onready var playerSprite: AnimatedSprite2D = $AnimatedSprite2D
 var vel: Vector2 = Vector2.ZERO
 var characterName: String

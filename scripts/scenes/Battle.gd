@@ -16,33 +16,23 @@ func _ready():
 	_updateStatus()
 
 func _generateQuestion() -> Dictionary:
-	var a = randi() % 12 + 1
-	var b = randi() % 12 + 1
-	var op = randi() % 3
-	var ans := 0
-	var qtext := ""
-	match op:
-		0:
-			ans = a + b
-			qtext = "%d + %d = ?" % [a, b]
-		1:
-			ans = a - b
-			qtext = "%d - %d = ?" % [a, b]
-		2:
-			ans = a * b
-			qtext = "%d × %d = ?" % [a, b]
+	var questions = GlobalManager.getQuestionsForCurrentMap()
+	if questions.is_empty():
+		return {"q": "Sem perguntas disponíveis", "options": ["..."], "answer": 0}
 
-	var options: Array = [str(ans)]
-	while options.size() < 4:
-		var alt = ans + int(randf() * 11) - 5
-		if alt < 0:
-			alt = abs(alt) + 1
-		if str(alt) not in options:
-			options.append(str(alt))
+	var question = questions[randi() % questions.size()]
+	var options: Array = []
+	for a in question["answers"]:
+		options.append(a["answer"])
 
-	options.shuffle()
-	var answer_index = options.find(str(ans))
-	return {"q": qtext, "options": options, "answer": answer_index}
+	var correct_index = 0
+	for i in range(options.size()):
+		if question["answers"][i]["correct"]:
+			correct_index = i
+			break
+
+	return {"q": question["question"], "options": options, "answer": correct_index}
+
 
 func _showQuestion():
 	var qdata = _generateQuestion()

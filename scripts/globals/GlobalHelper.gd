@@ -15,8 +15,8 @@ const SCENE_PATHS: Dictionary = {
 
 const MAP_SPRITES: Dictionary = {
 	GameEnums.MapEnum.MAP1: "res://assets/sprites/maps/map1.png",
-	GameEnums.MapEnum.MAP2: "res://assets/sprites/maps/map2.jpg",
-	GameEnums.MapEnum.MAP3: "res://assets/sprites/maps/map3.jpeg",
+	GameEnums.MapEnum.MAP2: "res://assets/sprites/maps/map2.png",
+	GameEnums.MapEnum.MAP3: "res://assets/sprites/maps/map3.png",
 	GameEnums.MapEnum.MAP4: "res://assets/sprites/maps/map4.png"
 }
 
@@ -49,7 +49,10 @@ func goToWorld() -> void: changeSceneTo(GameEnums.SceneEnum.WORLD)
 
 func goToMenu() -> void: changeSceneTo(GameEnums.SceneEnum.MENU)
 
-func endGame() -> void: changeSceneTo(GameEnums.SceneEnum.END)
+func endGame() -> void: 
+	MusicManager.stopMusic()
+	clearManagers()
+	changeSceneTo(GameEnums.SceneEnum.END)
 
 func killBoss() -> void:
 	GlobalManager.bossKilled = true
@@ -68,7 +71,6 @@ func clearManagers() -> void:
 	GlobalManager.bossKilled = false
 	GlobalManager.currentMap = GameEnums.MapEnum.MAP1
 	GlobalManager.currentPlayer = null
-	GlobalManager.playerSprite = null
 	GlobalManager.playerPosisionBeforeLastBattle = Vector2(400, 400)
 	GlobalManager.gameQuestions = GlobalManager.defaultQuestions
 	EnemyManager.alreadyInstantiated = false
