@@ -6,4 +6,4 @@ enum SceneEnum { MENU, LOADMENU, COMBAT, GAMEOVER, WORLD, ENEMY, END }
 
 enum MapEnum { MAP1, MAP2, MAP3, MAP4 }
 
-enum MusicEnum { BATTLE, OVERWORLD }
+enum MusicEnum { BATTLE, OVERWORLD, BOSS_BATTLE, GAME_OVER }

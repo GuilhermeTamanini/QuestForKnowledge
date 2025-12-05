@@ -10,6 +10,10 @@ var current_answer := -1
 func _ready():
 	enemyHealth = enemy["health"]
 	isBoss = enemy["isBoss"]
+	
+	if isBoss:
+		MusicManager.playMusic(GameEnums.MusicEnum.BOSS_BATTLE)
+	
 	playerHealth = 20
 	randomize()
 	_showQuestion()
@@ -68,27 +72,14 @@ func _onOptionPressed(selected_index):
 	else:
 		$MarginContainer/VBoxContainer/StatusLabel.text = "Errou! Você recebeu %d de dano." % GlobalManager.DAMAGE
 
-		enemyHealth -= GlobalManager.DAMAGE
+		playerHealth -= GlobalManager.DAMAGE
 
 		_updateStatus()
-		if enemyHealth > 0:
+		if playerHealth > 0:
 			_showQuestion()
 			return
-		if isBoss:
-			EnemyManager.removeEnemy(enemy["id"])
-			GlobalHelper.killBoss()
-			return
-		EnemyManager.removeEnemy(enemy["id"])
 
-		#playerHealth -= GlobalManager.DAMAGE
-
-		#_updateStatus()
-		#if playerHealth > 0:
-			#_showQuestion()
-			#return
-#
-		#GlobalHelper.clearManagers()
-		#GlobalHelper.gameOver()
+		GlobalHelper.gameOver()
 
 func _updateStatus():
 	$MarginContainer/VBoxContainer/StatusLabel.text += "\nPlayer HP: %d | Inimigo HP: %d" % [

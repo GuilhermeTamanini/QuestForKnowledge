@@ -37,3 +37,22 @@ text = "Link para o forms"
 [node name="QuitButton" type="Button" parent="CenterContainer"]
 layout_mode = 2
 text = "Sair do jogo"
+
+[node name="LinkPopup" type="PopupPanel" parent="."]
+size = Vector2i(308, 100)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LinkPopup"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 588.0
+offset_bottom = 96.0
+
+[node name="LinkLabel" type="Label" parent="LinkPopup/VBoxContainer"]
+layout_mode = 2
+text = "Se não foi redirecionado ao clicar no botão copie o link para acessar o form."
+
+[node name="LinkEdit" type="LineEdit" parent="LinkPopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="LinkPopup/VBoxContainer"]
+layout_mode = 2

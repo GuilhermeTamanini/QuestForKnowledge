@@ -5,7 +5,9 @@ var musicPlayer: AudioStreamPlayer
 var currentMusic: AudioStream = null
 const MUSICS_PATH = {
 	GameEnums.MusicEnum.BATTLE: preload("res://assets/soundtracks/LetsBattle.mp3"),
-	GameEnums.MusicEnum.OVERWORLD: preload("res://assets/soundtracks/QFK_Overworld.mp3")
+	GameEnums.MusicEnum.OVERWORLD: preload("res://assets/soundtracks/QFK_Overworld.mp3"),
+	GameEnums.MusicEnum.BOSS_BATTLE: preload("res://assets/soundtracks/BossBattle.mp3"),
+	GameEnums.MusicEnum.GAME_OVER: preload("res://assets/soundtracks/QFK_GameOver.mp3")
 }
 
 func _ready():

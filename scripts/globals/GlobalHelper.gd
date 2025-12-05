@@ -37,7 +37,7 @@ func setCurrentMap() -> void:
 func changeSceneTo(scene: GameEnums.SceneEnum) -> void:
 	get_tree().change_scene_to_file(SCENE_PATHS[scene])
 
-func gameOver() -> void: 
+func gameOver() -> void:
 	changeSceneTo(GameEnums.SceneEnum.GAMEOVER)
 	MusicManager.stopMusic()
 
@@ -49,7 +49,7 @@ func goToWorld() -> void: changeSceneTo(GameEnums.SceneEnum.WORLD)
 
 func goToMenu() -> void: changeSceneTo(GameEnums.SceneEnum.MENU)
 
-func endGame() -> void: 
+func endGame() -> void:
 	MusicManager.stopMusic()
 	clearManagers()
 	changeSceneTo(GameEnums.SceneEnum.END)

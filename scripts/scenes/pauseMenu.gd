@@ -21,6 +21,7 @@ func _togglePause() -> void:
 	visible = get_tree().paused
 
 func _onMenuPressed() -> void:
+	MusicManager.stopMusic()
 	_togglePause()
 	GlobalHelper.goToMenu()
 
